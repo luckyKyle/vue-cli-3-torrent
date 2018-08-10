@@ -1,0 +1,72 @@
+{
+  "name": "f9stock-vue-cli",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "transformModules": {
+    "cube-ui": {
+      "transform": "cube-ui/lib/${member}",
+      "kebabCase": true,
+      "style": {
+        "ignore": [
+          "create-api",
+          "better-scroll"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "cube-ui": "^1.10.10",
+    "fastclick": "^1.0.6",
+    "vue": "^2.5.17",
+    "vue-lazyload": "^1.2.6",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-rc.12",
+    "@vue/cli-plugin-eslint": "^3.0.0-rc.12",
+    "@vue/cli-service": "^3.0.0-rc.12",
+    "cssnano": "^4.0.5",
+    "cssnano-preset-advanced": "^4.0.0",
+    "postcss-aspect-ratio-mini": "0.0.2",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^12.0.0",
+    "postcss-px-to-viewport": "0.0.3",
+    "postcss-url": "^8.0.0",
+    "postcss-viewport-units": "^0.1.4",
+    "postcss-write-svg": "^3.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-post-compile-plugin": "^0.4.1",
+    "webpack-transform-modules-plugin": "^0.3.5"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
