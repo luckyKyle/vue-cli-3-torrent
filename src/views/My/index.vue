@@ -9,7 +9,7 @@
 import { Button } from 'cube-ui'
 export default {
   components: {
-    Button,
+    Button
   },
   data() {
     return {

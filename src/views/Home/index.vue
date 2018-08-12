@@ -3,7 +3,6 @@
     <h1>首页</h1>
     <div class="btn-wrapper">
       <Button class="btn">调整</Button>
-      <button>123123123</button>
       <Loading></Loading>
     </div>
     <img src=""
@@ -14,6 +13,7 @@
 
 <script type="text/ecmascript-6">
 import { Button, Loading } from 'cube-ui'
+import { HOME } from '@/api'
 export default {
   components: {
     Button,
@@ -23,6 +23,21 @@ export default {
     return {
 
     }
+  },
+  methods: {
+    async _fetchData() {
+      const res = await HOME({ id: 1 })
+      console.log(res)
+      try {
+        const data = res.data
+        console.log(data)
+      } catch (err) {
+        console.log('获取数据错误', err)
+      }
+    }
+  },
+  created() {
+    this._fetchData()
   }
 }
 </script>

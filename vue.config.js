@@ -8,7 +8,6 @@ const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
   chainWebpack: config => {
-
     // 修改插件
     config
       .plugin('transform-modules')
