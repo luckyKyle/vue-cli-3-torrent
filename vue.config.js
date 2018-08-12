@@ -2,11 +2,18 @@ const path = require('path')
 const DEV = process.env.NODE_ENV !== 'production'
 const webpackDevConf = require('./build/webpack.dev.conf')
 const webpackProdConf = require('./build/webpack.dev.conf')
+const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
   chainWebpack: config => {
+
+    // 修改插件
+    config
+      .plugin('transform-modules')
+      .use(TransformModulesPlugin)
+
     config.resolve.alias
       .set('cube-ui', 'cube-ui/lib')
       .set('@', resolve('src'))

@@ -2,7 +2,9 @@
   <div class="home">
     <h1>首页</h1>
     <div class="btn-wrapper">
-      <Button>调整</Button>
+      <Button class="btn">调整</Button>
+      <button>123123123</button>
+      <Loading></Loading>
     </div>
     <img src=""
          class="banner"
@@ -11,10 +13,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { Button } from 'cube-ui'
+import { Button, Loading } from 'cube-ui'
 export default {
   components: {
     Button,
+    Loading
   },
   data() {
     return {
@@ -32,7 +35,6 @@ export default {
   .banner
     text-align center
     max-width 100%
-  .btn-wrapper
+  .btn
     width 120px
-    background red
 </style>
