@@ -16,13 +16,12 @@ axios.defaults.transformRequest = (data) => Qs.stringify(data)
 // http请求拦截器
 axios.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-
-  // 判断是否存在ticket，即判断用户是否登录，如果存在的话，则每个http header都加上ticket
+  // 判断是否存在token，即判断用户是否登录，如果存在的话，则每个http header都加上token
   if (cookie.get('token')) {
     // 用户每次操作，都将cookie设置成2小时
     cookie.set('token', cookie.get('token'), 1 / 12)
-    // 每个http header都加上ticket
-    config.headers.ticket = cookie.get('token')
+    // 每个http header都加上token
+    config.headers.token = cookie.get('token')
     // 每个http header都加上personnelid
     if (sessionStorage.loginStaffInfo) {
       config.headers.personnelid = sessionStorage.personnelid
@@ -42,17 +41,12 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(
   response => {
     if (response.status !== 200) {
-      console.log('状态码', response.status)
+      console.log('状态码非200', response.status)
     }
     if (response.data.code !== ERR_OK) {
 
-      // const toast = this.$createToast({
-      //   time: 1000,
-      //   txt: 'Toast time 1s'
-      // })
-      // toast.show()
     } else {
-      console.log('this', this)
+      console.log('拦截请求结果========', response.data)
       return response
     }
   },

@@ -7,14 +7,11 @@ import fastclick from 'fastclick'
 import lodash from 'lodash'
 import axios from '@/api/axios'
 // 引入 Style 加载基础样式
-import { Toast, Popup } from 'cube-ui'
 
 import './common/stylus/index.styl'
 
 Vue.config.productionTip = false
 
-Vue.use(Toast)
-Vue.use(Popup)
 // 图片懒加载
 Vue.use(VueLazyLoad, {
   loading: require('./common/image/default.png')

@@ -15,6 +15,6 @@ module.exports = {
     "no-trailing-spaces": 0,
     'generator-star-spacing': 0,
     'space-before-function-paren': [0, 'always'],
-    'indent': 'off'
+    "eol-last": 0
   }
 }

@@ -38,7 +38,7 @@ module.exports = {
   },
   // dev-server 服务代理配置
   devServer: {
-    open: true, // 配置自启浏览器
+    open: false, // 配置自启浏览器
     host: '0.0.0.0',
     port: 8089,
     https: false,

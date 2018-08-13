@@ -2,21 +2,15 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/news">News</router-link> |
-      <router-link to="/stockCircle">StockCircle</router-link> |
       <router-link to="/my">My</router-link>
     </div>
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-    }
-  }
-}
 </script>
 
 <style lang="stylus">
