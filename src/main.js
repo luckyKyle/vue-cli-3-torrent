@@ -10,12 +10,18 @@ import axios from '@/api/axios'
 
 import './common/stylus/index.styl'
 
-Vue.config.productionTip = false
+import { Dialog, Toast, DatePicker } from 'cube-ui'
+
+Vue.use(Dialog)
+Vue.use(Toast)
+Vue.use(DatePicker)
 
 // 图片懒加载
 Vue.use(VueLazyLoad, {
   loading: require('./common/image/default.png')
 })
+
+Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 Vue.prototype._ = lodash

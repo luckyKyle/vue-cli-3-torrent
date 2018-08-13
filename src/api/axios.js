@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { MAX_TIME_OUT, ERR_OK, HOST } from './config'
 import Qs from 'qs'
-import cookie from '@/common/utils/cache'
-import { Toast } from 'cube-ui'
+import cookie from '@/utils/cache'
+import Vue from 'vue'
 
 // 超时时间
 axios.defaults.timeout = MAX_TIME_OUT
@@ -13,8 +13,15 @@ axios.defaults.baseURL = HOST
 // 整理数据格式
 axios.defaults.transformRequest = (data) => Qs.stringify(data)
 
+const vm = new Vue()
+
 // http请求拦截器
 axios.interceptors.request.use(config => {
+  const toast = vm.$createToast({
+    time: 1000,
+    text: ''
+  })
+  toast.show()
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
   // 判断是否存在token，即判断用户是否登录，如果存在的话，则每个http header都加上token
   if (cookie.get('token')) {
@@ -27,13 +34,9 @@ axios.interceptors.request.use(config => {
       config.headers.personnelid = sessionStorage.personnelid
     }
   }
+  toast.hide()
   return config
 }, error => {
-  // loadinginstace.close()
-  Toast.$create({
-    time: 0,
-    txt: 'Toast time 0'
-  })
   return Promise.reject(error)
 })
 
@@ -41,10 +44,13 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(
   response => {
     if (response.status !== 200) {
-      console.log('状态码非200', response.status)
+      vm.$createToast({
+        time: 1000,
+        txt: response.status + '错误'
+      }).show()
     }
     if (response.data.code !== ERR_OK) {
-
+      console.log('错误码有误==', response.data)
     } else {
       console.log('拦截请求结果========', response.data)
       return response

@@ -15,18 +15,6 @@
       "git add"
     ]
   },
-  "transformModules": {
-    "cube-ui": {
-      "transform": "cube-ui/lib/${member}",
-      "kebabCase": true,
-      "style": {
-        "ignore": [
-          "create-api",
-          "better-scroll"
-        ]
-      }
-    }
-  },
   "dependencies": {
     "axios": "^0.18.0",
     "cube-ui": "^1.10.10",
@@ -37,7 +25,8 @@
     "vue-lazyload": "^1.2.6",
     "vue-meta": "^1.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.12",

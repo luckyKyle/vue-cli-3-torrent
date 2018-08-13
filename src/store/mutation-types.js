@@ -1,2 +1,1 @@
-export const SET_USERINFO = 'SET_USERINFO'
-export const SET_FAVORITE = 'SET_FAVORITE'
+export const SET_USETINFO = 'SET_USETINFO' // 设置用户信息

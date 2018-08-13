@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1>首页</h1>
-
     <div v-if="imgUrls.length">
       <div v-for="(item, index) in imgUrls"
            :key="index"
@@ -11,24 +10,54 @@
       </div>
     </div>
 
+    <cube-button @click.native="showDatePicker"
+                 class="btn">
+      show dialog
+    </cube-button>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { Slide } from 'cube-ui'
+import { Button } from 'cube-ui'
 import { HOME } from '@/api'
 export default {
   components: {
-    UiSlide: Slide
+    CubeButton: Button
   },
   data() {
     return {
-      imgUrls: []
+      imgUrls: [],
+      datePicker: null
     }
   },
   methods: {
+    showDatePicker() {
+      this.datePicker = this.$createDatePicker({
+        title: 'Date Picker',
+        min: new Date(2008, 7, 8),
+        max: new Date(2020, 9, 20),
+        value: new Date(),
+        onSelect: this.selectHandle,
+        onCancel: this.cancelHandle
+      })
+      this.datePicker.show()
+    },
+    selectHandle(date, selectedVal, selectedText) {
+      this.$createDialog({
+        type: 'warn',
+        content: `Selected Item: <br/> - date: ${date} <br/> - value: ${selectedVal.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
+        icon: 'cubeic-alert'
+      }).show()
+    },
+    cancelHandle() {
+      this.$createToast({
+        type: 'correct',
+        txt: 'Picker canceled',
+        time: 1000
+      }).show()
+    },
     async _fetchData() {
-      const res = await HOME({ id: 1 })
+      const res = await HOME()
       try {
         const data = res.data
         this.imgUrls = data.data.imgUrls
@@ -50,5 +79,7 @@ export default {
   background #fff
   .img
     max-width 50%
-    
+  .btn
+    width 300px
+    margin auto
 </style>
