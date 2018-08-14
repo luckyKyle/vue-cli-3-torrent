@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MAX_TIME_OUT, ERR_OK, HOST } from './config'
+import { MAX_TIME_OUT, ERR_OK } from './config'
 import Qs from 'qs'
 import cookie from '@/utils/cache'
 import Vue from 'vue'
@@ -8,7 +8,7 @@ import Vue from 'vue'
 axios.defaults.timeout = MAX_TIME_OUT
 
 // 设置默认地址
-axios.defaults.baseURL = HOST
+axios.defaults.baseURL = process.env.VUE_APP_MOCK_URL
 
 // 整理数据格式
 axios.defaults.transformRequest = (data) => Qs.stringify(data)

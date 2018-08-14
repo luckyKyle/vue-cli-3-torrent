@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from '@/routers'
 import store from '@/store'
+import VueMeta from 'vue-meta'
 import VueLazyLoad from 'vue-lazyload'
 import fastclick from 'fastclick'
 import lodash from 'lodash'
@@ -15,6 +16,8 @@ import { Dialog, Toast, DatePicker } from 'cube-ui'
 Vue.use(Dialog)
 Vue.use(Toast)
 Vue.use(DatePicker)
+
+Vue.use(VueMeta)
 
 // 图片懒加载
 Vue.use(VueLazyLoad, {

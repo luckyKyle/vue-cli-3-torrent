@@ -1,8 +1,8 @@
+const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
-const devWebpackConfig = merge(baseWebpackConfig, {
-  name: '',
-  plugins: []
-})
 
-module.exports = devWebpackConfig
+const resolve = (dir) => path.join(__dirname, dir)
+module.exports = {
+ 
+}

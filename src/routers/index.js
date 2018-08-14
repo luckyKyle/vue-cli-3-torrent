@@ -21,7 +21,7 @@ const router = new VueRouter({
       path: '/my',
       name: 'my',
       meta: {
-        requireAuth: true
+        // requireAuth: true
       },
       component: resolve => require(['@/views/My'], resolve)
     }]

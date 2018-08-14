@@ -1,8 +1,8 @@
 const path = require('path')
 const DEV = process.env.NODE_ENV !== 'production'
-const webpackDevConf = require('./build/webpack.dev.conf')
-const webpackProdConf = require('./build/webpack.dev.conf')
 const TransformModulesPlugin = require('webpack-transform-modules-plugin')
+const webpackDevConf = require('./build/webpack.dev.conf')
+const webpackProdConf = require('./build/webpack.prod.conf')
 
 const resolve = (dir) => path.join(__dirname, dir)
 
@@ -25,6 +25,9 @@ module.exports = {
   },
   configureWebpack(config) {
     // 根据Node变量环境返回对应的自定义配置来合并config
+    console.log('环境================', DEV)
+    console.log('开发================', webpackDevConf)
+    console.log('生产================', webpackProdConf)
     return DEV ? webpackDevConf : webpackProdConf
   },
   // css相关配置
