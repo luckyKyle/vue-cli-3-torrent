@@ -8,13 +8,15 @@
 export default {
   data() {
     return {
-      myTitle: '标题'
+      pageTitle: '个人中心'
     }
   },
-  metaInfo: {
-    title: '个人中心',
-    titleTemplate: '%s - Test',
-    script: [{ innerHTML: 'console.log("hello hello!")', type: 'text/javascript' }]
+  metaInfo() {
+    return {
+      title: this.pageTitle,
+      titleTemplate: '%s - Test',
+      script: [{ innerHTML: 'console.log("Hey!~~!")', type: 'text/javascript' }]
+    }
   }
 }
 </script>

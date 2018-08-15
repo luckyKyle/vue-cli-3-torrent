@@ -1,66 +1,51 @@
 <template>
   <div class="container">
     <h1>首页</h1>
-    <div v-if="imgUrls.length">
-      <div v-for="(item, index) in imgUrls"
-           :key="index"
-           class="slide-item">
-        <img v-lazy="item.url"
-             class="img">
-      </div>
-    </div>
+
+    <cube-slide v-if="imgUrls.length"
+                class="slide-wrapper">
+      <cube-slide-item v-for="(item, index) in imgUrls"
+                       :key="index"
+                       class="slide-item">
+        <img class="img"
+             v-lazy="item.url">
+      </cube-slide-item>
+    </cube-slide>
 
     <cube-button @click.native="showDatePicker"
                  class="btn">
-      show dialog
+      Show DatePicker
     </cube-button>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { Button } from 'cube-ui'
-import { HOME } from '@/api'
+import { getHome } from '@/api'
 export default {
-  components: {
-    CubeButton: Button
-  },
   data() {
     return {
-      imgUrls: [],
-      datePicker: null
+      imgUrls: []
     }
   },
   methods: {
+    // 触发时间选择
     showDatePicker() {
-      this.datePicker = this.$createDatePicker({
+      this.$createDatePicker({
         title: 'Date Picker',
         min: new Date(2008, 7, 8),
         max: new Date(2020, 9, 20),
         value: new Date(),
-        onSelect: this.selectHandle,
-        onCancel: this.cancelHandle
-      })
-      this.datePicker.show()
-    },
-    selectHandle(date, selectedVal, selectedText) {
-      this.$createDialog({
-        type: 'warn',
-        content: `Selected Item: <br/> - date: ${date} <br/> - value: ${selectedVal.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
-        icon: 'cubeic-alert'
+        onSelect: this.selectHandle, // 确定回调
+        onCancel: this.cancelHandle // 取消回调
       }).show()
     },
-    cancelHandle() {
-      this.$createToast({
-        type: 'correct',
-        txt: 'Picker canceled',
-        time: 1000
-      }).show()
-    },
+    // 获取数据
     async _fetchData() {
-      const res = await HOME()
+      const res = await getHome()
       try {
         const data = res.data
         this.imgUrls = data.data.imgUrls
+        console.log(this.newsList)
       } catch (err) {
         console.log('获取数据错误', err)
       }
@@ -77,8 +62,15 @@ export default {
 @import '~common/stylus/mixin'
 .container
   background #fff
-  .img
-    max-width 50%
+  overflow hidden
+  .slide-wrapper
+    width 100%
+    height 450px
+    .slide-item
+      width inherit
+      height inherit
+      .img
+        width 100%
   .btn
     width 300px
     margin auto

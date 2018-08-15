@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/news">News</router-link>|
       <router-link to="/my">My</router-link>
     </div>
     <keep-alive>

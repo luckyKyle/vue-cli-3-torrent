@@ -1,9 +1,10 @@
-root = true
+root = true #表明是最顶层的配置文件，发现设为true时，才会停止查找.editorconfig文件
 
-indent_style = space
-indent_size = 2
-tab_width = 2
-end_of_line = lf
+
+[*] # 对所有文件生效
 charset = utf-8
-insert_final_newline = true
-trim_trailing_whitespace = true
+indent_style = space #tab为hard-tabs，space为soft-tabs
+indent_size = 2 #设置整数表示规定每级缩进的列数和soft-tabs的宽度
+end_of_line = lf #定义换行符，支持lf、cr和crlf
+insert_final_newline = true #设为true表明使文件以一个空白行结尾，false反之
+trim_trailing_whitespace = true #设为true表示会除去换行行首的任意空白字符，false反之

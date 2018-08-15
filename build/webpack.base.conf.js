@@ -1,6 +1,6 @@
 
 module.exports = {
-  cmodule: {},
+  module: {},
   plugins: [
   ]
 }

@@ -1,63 +1,55 @@
 import axios from 'axios'
-import { MAX_TIME_OUT, ERR_OK } from './config'
 import Qs from 'qs'
 import cookie from '@/utils/cache'
 import Vue from 'vue'
-
-// 超时时间
-axios.defaults.timeout = MAX_TIME_OUT
-
-// 设置默认地址
-axios.defaults.baseURL = process.env.VUE_APP_MOCK_URL
-
-// 整理数据格式
-axios.defaults.transformRequest = (data) => Qs.stringify(data)
+import { MAX_TIME_OUT, ERR_OK, HOST } from './config'
 
 const vm = new Vue()
+const axiosDefaults = axios.defaults
 
-// http请求拦截器
+// 超时时间
+axiosDefaults.timeout = MAX_TIME_OUT
+
+// 设置默认地址
+axiosDefaults.baseURL = HOST
+
+// 整理数据格式
+axiosDefaults.transformRequest = (data) => Qs.stringify(data)
+
+// http请求拦截器<pedding>
 axios.interceptors.request.use(config => {
-  const toast = vm.$createToast({
-    time: 1000,
-    text: ''
-  })
-  toast.show()
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-  // 判断是否存在token，即判断用户是否登录，如果存在的话，则每个http header都加上token
-  if (cookie.get('token')) {
+  const token = cookie.get('token')
+  // 判断是否存在token，即判断用户是否登录
+  if (token) {
     // 用户每次操作，都将cookie设置成2小时
-    cookie.set('token', cookie.get('token'), 1 / 12)
+    cookie.set('token', token, 1 / 12)
     // 每个http header都加上token
-    config.headers.token = cookie.get('token')
-    // 每个http header都加上personnelid
-    if (sessionStorage.loginStaffInfo) {
-      config.headers.personnelid = sessionStorage.personnelid
-    }
+    config.headers.token = token
   }
-  toast.hide()
   return config
 }, error => {
   return Promise.reject(error)
 })
 
-// http响应拦截器
+// http响应拦截器<done>
 axios.interceptors.response.use(
-  response => {
-    if (response.status !== 200) {
-      vm.$createToast({
-        time: 1000,
-        txt: response.status + '错误'
-      }).show()
+  (response) => {
+    let data = response.data
+    // 判断返回数据格式
+    if (typeof data === 'string' && data !== '') {
+      data = JSON.parse(data)
     }
-    if (response.data.code !== ERR_OK) {
-      console.log('错误码有误==', response.data)
-    } else {
-      console.log('拦截请求结果========', response.data)
+
+    if (data.code === ERR_OK) {
+      console.log('后台原始数据===', response.data)
       return response
+    } else {
+      vm.$createToast({ txt: data.message }).show()
     }
   },
   error => {
-    return Promise.reject(error.response) // 返回接口返回的错误信息
+    return Promise.reject(error.response)
   })
 
 export default axios

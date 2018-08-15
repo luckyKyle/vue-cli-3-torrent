@@ -1,9 +1,8 @@
 const path = require('path')
 const DEV = process.env.NODE_ENV !== 'production'
-const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 const webpackDevConf = require('./build/webpack.dev.conf')
 const webpackProdConf = require('./build/webpack.prod.conf')
-
+const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
@@ -25,9 +24,6 @@ module.exports = {
   },
   configureWebpack(config) {
     // 根据Node变量环境返回对应的自定义配置来合并config
-    console.log('环境================', DEV)
-    console.log('开发================', webpackDevConf)
-    console.log('生产================', webpackProdConf)
     return DEV ? webpackDevConf : webpackProdConf
   },
   // css相关配置
@@ -43,10 +39,12 @@ module.exports = {
   devServer: {
     open: false, // 配置自启浏览器
     host: '0.0.0.0',
-    port: 8089,
+    port: 8088,
     https: false,
     hotOnly: false,
     proxy: null, // 设置代理
-    before: app => {}
+    before: app => {
+      // `app` 是一个 express 实例
+    }
   }
 }

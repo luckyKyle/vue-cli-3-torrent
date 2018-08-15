@@ -2,21 +2,39 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from '@/routers'
 import store from '@/store'
+
 import VueMeta from 'vue-meta'
 import VueLazyLoad from 'vue-lazyload'
+// import VConsole from 'vconsole'
+
 import fastclick from 'fastclick'
 import lodash from 'lodash'
 import axios from '@/api/axios'
-// 引入 Style 加载基础样式
 
+import 'nprogress/nprogress.css'
 import './common/stylus/index.styl'
+// 引入 Style 加载基础样式
+import {
+  // eslint-disable-next-line
+  Style,
+  Slide,
+  Loading,
+  Button,
+  Dialog,
+  Toast,
+  Scroll,
+  DatePicker
+} from 'cube-ui'
 
-import { Dialog, Toast, DatePicker } from 'cube-ui'
-
+Vue.use(Scroll)
+Vue.use(Loading)
+Vue.use(Button)
 Vue.use(Dialog)
 Vue.use(Toast)
 Vue.use(DatePicker)
+Vue.use(Slide)
 
+// 单独设置页面的title和meta信息
 Vue.use(VueMeta)
 
 // 图片懒加载
@@ -30,6 +48,12 @@ Vue.prototype.$http = axios
 Vue.prototype._ = lodash
 
 fastclick.attach(document.body)
+
+// 开发环境开启vConsole
+if (process.env.NODE_ENV !== 'production') {
+  // const vConsole = new VConsole()
+  // console.log(vConsole.version)
+}
 
 new Vue({
   router,
