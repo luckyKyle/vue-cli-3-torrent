@@ -5,51 +5,61 @@ import Vue from 'vue'
 import { MAX_TIME_OUT, ERR_OK, HOST } from './config'
 
 const vm = new Vue()
-const axiosDefaults = axios.defaults
 
-// 超时时间
-axiosDefaults.timeout = MAX_TIME_OUT
-
-// 设置默认地址
-axiosDefaults.baseURL = HOST
-
-// 整理数据格式
-axiosDefaults.transformRequest = (data) => Qs.stringify(data)
-
-// http请求拦截器<pedding>
-axios.interceptors.request.use(config => {
-  config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-  const token = cookie.get('token')
-  // 判断是否存在token，即判断用户是否登录
-  if (token) {
-    // 用户每次操作，都将cookie设置成2小时
-    cookie.set('token', token, 1 / 12)
-    // 每个http header都加上token
-    config.headers.token = token
+const Axios = axios.create({
+  baseURL: HOST, // 前缀
+  timeout: MAX_TIME_OUT, // 超时时间
+  responseType: 'json', // 数据格式
+  withCredentials: true, // 是否允许带cookie这些
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
-  return config
-}, error => {
-  return Promise.reject(error)
 })
 
+// http请求拦截器<pendding>
+Axios.interceptors.request.use(
+  config => {
+    if (config.method === 'post') {
+      // 整理数据格式
+      config.data.transformRequest = data => Qs.stringify(data)
+    }
+    const token = cookie.get('token')
+    // 判断是否存在token，即判断用户是否登录
+    if (token) {
+      cookie.set('token', token, 1 / 12) // 用户每次操作，都将cookie设置成2小时
+      config.headers.Authorization = token // 每个http header都加上token
+    }
+    return config
+  },
+  error => {
+    console.log('error')
+    vm.$createToast({ txt: error.data.message }).show()
+    return Promise.reject(error)
+  }
+)
+
 // http响应拦截器<done>
-axios.interceptors.response.use(
-  (response) => {
+Axios.interceptors.response.use(
+  response => {
+    console.log('response', response)
     let data = response.data
     // 判断返回数据格式
     if (typeof data === 'string' && data !== '') {
       data = JSON.parse(data)
     }
-
+    console.log('config', data)
     if (data.code === ERR_OK) {
       console.log('后台原始数据===', response.data)
-      return response
     } else {
       vm.$createToast({ txt: data.message }).show()
     }
+    return response
   },
   error => {
+    console.log('error.response', error.response.message)
     return Promise.reject(error.response)
-  })
+  }
+)
 
-export default axios
+// 对axios的实例重新封装成一个plugin ,方便 Vue.use(xxxx)
+export default Axios

@@ -9,7 +9,7 @@
           <li class="item border-bottom"
               v-for="(item, index) in newsList"
               :key="index">
-            {{item.user.address}}
+            {{item.userName}}
           </li>
         </ul>
       </cube-scroll>
@@ -19,7 +19,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getNews } from '@/api'
 export default {
   data() {
     return {
@@ -29,10 +28,10 @@ export default {
   methods: {
     // 获取数据
     async _fetchData() {
-      const res = await getNews()
+      const res = await this.$mock('users')
       try {
         const data = res.data
-        this.newsList = data.data.list
+        this.newsList = data.list
       } catch (err) {
         console.log('获取数据错误', err)
       }

@@ -2,26 +2,34 @@
   <div class="container">
     <h1>首页</h1>
 
-    <cube-slide v-if="imgUrls.length"
-                class="slide-wrapper">
-      <cube-slide-item v-for="(item, index) in imgUrls"
-                       :key="index"
-                       class="slide-item">
-        <img class="img"
-             v-lazy="item.url">
-      </cube-slide-item>
-    </cube-slide>
+    <vue-lazy-component>
+      <cube-slide v-if="imgUrls.length"
+                  class="slide-wrapper">
+        <cube-slide-item v-for="(item, index) in imgUrls"
+                         :key="index"
+                         class="slide-item">
+          <img class="img"
+               v-lazy="item.url">
+        </cube-slide-item>
+      </cube-slide>
 
-    <cube-button @click.native="showDatePicker"
-                 class="btn">
-      Show DatePicker
-    </cube-button>
+      <cube-button @click.native="showDatePicker"
+                   class="btn">
+        Show DatePicker
+      </cube-button>
+      <!-- skeleton component -->
+      <skeleton slot="skeleton"></skeleton>
+    </vue-lazy-component>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import { getHome } from '@/api'
+import Skeleton from '@/components/Skeleton'
 export default {
+  components: {
+    Skeleton
+  },
   data() {
     return {
       imgUrls: []
@@ -44,8 +52,8 @@ export default {
       const res = await getHome()
       try {
         const data = res.data
+        console.log('data===', data)
         this.imgUrls = data.data.imgUrls
-        console.log(this.newsList)
       } catch (err) {
         console.log('获取数据错误', err)
       }

@@ -5,14 +5,16 @@ import store from '@/store'
 
 import VueMeta from 'vue-meta'
 import VueLazyLoad from 'vue-lazyload'
-// import VConsole from 'vconsole'
+import VueLazyComponent from '@xunlei/vue-lazy-component'
 
 import fastclick from 'fastclick'
 import lodash from 'lodash'
 import axios from '@/api/axios'
+import mock from '@/mock'
 
 import 'nprogress/nprogress.css'
 import './common/stylus/index.styl'
+
 // 引入 Style 加载基础样式
 import {
   // eslint-disable-next-line
@@ -37,6 +39,9 @@ Vue.use(Slide)
 // 单独设置页面的title和meta信息
 Vue.use(VueMeta)
 
+// 模版懒加载 可做骨架屏
+Vue.use(VueLazyComponent)
+
 // 图片懒加载
 Vue.use(VueLazyLoad, {
   loading: require('./common/image/default.png')
@@ -45,6 +50,7 @@ Vue.use(VueLazyLoad, {
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
+Vue.prototype.$mock = mock
 Vue.prototype._ = lodash
 
 fastclick.attach(document.body)
