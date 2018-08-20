@@ -4,6 +4,7 @@ import router from '@/routers'
 import store from '@/store'
 
 import VueMeta from 'vue-meta'
+import VConsole from 'vconsole'
 import VueLazyLoad from 'vue-lazyload'
 import VueLazyComponent from '@xunlei/vue-lazy-component'
 
@@ -56,9 +57,9 @@ Vue.prototype._ = lodash
 fastclick.attach(document.body)
 
 // 开发环境开启vConsole
-if (process.env.NODE_ENV !== 'production') {
-  // const vConsole = new VConsole()
-  // console.log(vConsole.version)
+if (process.env.NODE_ENV === 'production') {
+  const vConsole = new VConsole()
+  console.log(vConsole.version)
 }
 
 new Vue({

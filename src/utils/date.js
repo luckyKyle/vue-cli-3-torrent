@@ -30,7 +30,10 @@ export const padTime = (num) => num < 10 ? '0' + num : num
  * @param {传入的时间戳} timestamp
  * @param {布尔值是否需要时钟} needTime
  * @param {返回的格式 (1:yyyy-mm-dd或者2: dd/mm/yyyy )} format
- * Example: timestampToTime(1489525200000, true) -> "2017-03-15 05:00:00"
+ * Example1: timestampToTime(1489525200000, true) -> "2017-03-15 05:00:00"
+ * Example2: timestampToTime(1489525200000, false) -> "2017-03-15"
+ * Example3: timestampToTime(1489525200000, true,2) -> "2017/03/15 05:00:00"
+ * Example4: timestampToTime(1489525200000, false,2) -> "2017/03/15"
  */
 export const timestampToTime = (timestamp, needTime = false, format = 1) => {
   let date = new Date(timestamp)
@@ -42,10 +45,10 @@ export const timestampToTime = (timestamp, needTime = false, format = 1) => {
   let s = padTime(date.getSeconds())
 
   switch (format) {
-    case 1:
-      return needTime ? `${Y}-${M}-${D} ${h}:${m}:${s}` : `${Y}-${M}-${D}`
-    case 2:
-      return needTime ? `${D}/${M}/${Y} ${h}:${m}:${s}` : `${D}/${M}/${Y}`
+  case 1:
+    return needTime ? `${Y}-${M}-${D} ${h}:${m}:${s}` : `${Y}-${M}-${D}`
+  case 2:
+    return needTime ? `${D}/${M}/${Y} ${h}:${m}:${s}` : `${D}/${M}/${Y}`
   }
 }
 
@@ -143,10 +146,7 @@ export const getDateRange = (count = 2, start = getToday()) => {
   targetDay.setTime(targetDay.getTime() - (oneDay * (count - 1)))
   today = timestampToTime(today)
   targetDay = timestampToTime(targetDay)
-  return {
-    today,
-    targetDay
-  }
+  return { today, targetDay }
 }
 
 /**
@@ -164,11 +164,7 @@ export const getPreMontAllDate = (number = 0, date) => {
     let newDate = new Date(tempDate.replace(/\d+$/g, '1'))
     let unixTemp = newDate.setMonth(newDate.getMonth() - i)
     let tempArr = getMonthStartEnd(timestampToTime(new Date(unixTemp)))
-
-    let {
-      firstDay,
-      lastDay
-    } = tempArr
+    const { firstDay, lastDay } = tempArr
     result.push(getBetweenDateScope(firstDay, lastDay))
   }
 
@@ -194,14 +190,8 @@ export const getPreWeeks = (count = 1) => {
   }
   lastWeekDays = days.map(item => getDateRange(item).targetDay)
   return lastWeekDays.map(item => {
-    const {
-      monday,
-      sunday
-    } = getWeekStartEnd(item)
-    return {
-      monday,
-      sunday
-    }
+    const { monday, sunday } = getWeekStartEnd(item)
+    return { monday, sunday }
   })
 }
 
@@ -226,10 +216,7 @@ export const getWeekStartEnd = (date = '2018-01-01') => {
 
   monday = timestampToTime(monday)
   sunday = timestampToTime(sunday)
-  return {
-    monday,
-    sunday
-  }
+  return { monday, sunday }
 }
 
 /**
@@ -251,8 +238,5 @@ export const getMonthStartEnd = (date = '2018-01-01') => {
 
   firstDay = timestampToTime(firstDay)
   lastDay = timestampToTime(lastDay)
-  return {
-    firstDay,
-    lastDay
-  }
+  return { firstDay, lastDay }
 }

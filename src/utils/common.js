@@ -42,7 +42,7 @@ export const debounce = (fn, delay = 0) => {
 }
 
 /**
- * Usage: promisify
+ * Usage: 将指定函数转换成promise函数式
  * @param {} func
  * @return Object  {}
  * Example: const delay = promisify((d, cb) => setTimeout(cb, d))

@@ -6,6 +6,7 @@ import state from './state'
 import mutations from './mutations'
 import createPersistedState from 'vuex-persistedstate'
 import * as storage from '@/utils/storage'
+import createLogger from 'vuex/dist/logger'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -17,7 +18,8 @@ export default new Vuex.Store({
   mutations,
   strict: debug,
   // 状态持久化
-  plugins: [
+  plugins: debug ? [
+    createLogger(),
     createPersistedState({
       storage: {
         getItem: key => storage.get(key),
@@ -25,5 +27,5 @@ export default new Vuex.Store({
         removeItem: key => storage.remove(key)
       }
     })
-  ]
+  ] : []
 })

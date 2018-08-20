@@ -47,7 +47,6 @@ Axios.interceptors.response.use(
     if (typeof data === 'string' && data !== '') {
       data = JSON.parse(data)
     }
-    console.log('config', data)
     if (data.code === ERR_OK) {
       console.log('后台原始数据===', response.data)
     } else {

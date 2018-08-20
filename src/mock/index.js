@@ -6,7 +6,6 @@ import Axios from './mock'
  * 具体配置参考以下链接，可自行搭配参数
  * https://github.com/ctimmerm/axios-mock-adapter
  * *******************************************/
-
 class CreateInterface {
   constructor() {
     this.SUCCESS_STATUS = 200 // 成功状态
@@ -19,8 +18,6 @@ class CreateInterface {
   }
   init() {
     const { interfaces, mocker, SUCCESS_STATUS } = this
-
-    // 此处的filename直接指向的是data文件夹下的文件
     interfaces.forEach(filename => {
       mocker.onGet(filename).reply((config) => [SUCCESS_STATUS, Mock.mock(require(`./data/${filename}`))])
     })

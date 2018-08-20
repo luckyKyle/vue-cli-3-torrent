@@ -1,22 +1,113 @@
 // 背景图片
 bg-image($url)
-  background-image: url($url + "@2x.png")
-  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
-    background-image: url($url + "@3x.png")
+  background-image url($url + '@2x.png')
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+    background-image url($url + '@3x.png')
+
+// 锁定图片尺寸
+fix-image-size()
+  max-width 100%
+  max-height 100%
+
+// 多行溢出
+mult_line_ellipsis($line = 2)
+  overflow hidden
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-line-clamp $line
+  -webkit-box-orient vertical
+
+// 前缀icon
+prefix-icon($width = 0, $height = 0)
+  content ' '
+  position absolute
+  left 0
+  top 50%
+  height $height
+  width $width
+  transform translateY(-50%)
+  background-repeat no-repeat
+  background-size contain
 
 // 不换行
 no-wrap()
-  text-overflow: ellipsis
-  overflow: hidden
-  white-space: nowrap
+  text-overflow ellipsis
+  overflow hidden
+  white-space nowrap
+
+// 清楚按钮默认样式
+btn-normal()
+  background transparent
+  box-shadow none
+  border-radius 0
+  border none
+  padding 0
+  &::after
+    display none
 
 // 扩展点击区域
 extend-click()
-  position: relative
-  &:before
-    content: ''
-    position: absolute
-    top: -10px
-    left: -10px
-    right: -10px
-    bottom: -10px
+  position relative
+  &::before
+    content ''
+    position absolute
+    top -10px
+    left -10px
+    right -10px
+    bottom -10px
+
+//清除浮动
+clearfix()
+  &:before, &:after
+    content ''
+    display table
+  &:after
+    clear both
+    overflow hidden
+
+//水平垂直居中
+posCenter(){
+ position absolute
+ top 50%
+ left 50%
+ transform translate(-50%,-60%)
+}
+
+//垂直居中
+posY($offset = 0, $left = true)
+  position absolute
+  top 50%
+  transform translateY(-50%)
+  if ($left)
+    left $offset
+    right auto
+  else
+    left auto
+    right $offset
+
+// 等腰三角形
+triangle($width, $height, $color, $direction)
+  $width: $width/2
+  $color-border-style: $height solid $color
+  $transparent-border-style: $width solid transparent
+  height: 0
+  width: 0
+  if $direction==up {
+    border-bottom: $color-border-style
+    border-left: $transparent-border-style
+    border-right: $transparent-border-style
+  }
+  else if $direction==right {
+    border-left: $color-border-style
+    border-top: $transparent-border-style
+    border-bottom: $transparent-border-style
+  }
+  else if $direction==down {
+    border-top: $color-border-style
+    border-left: $transparent-border-style
+    border-right: $transparent-border-style
+  }
+  else if $direction==left
+    border-right: $color-border-style
+    border-top: $transparent-border-style
+    border-bottom: $transparent-border-style

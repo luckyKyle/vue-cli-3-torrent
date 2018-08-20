@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <h1>首页</h1>
+    <vue-lazy-component v-if="imgUrls.length"
+                        :timeout="1000">
 
-    <vue-lazy-component>
-      <cube-slide v-if="imgUrls.length"
-                  class="slide-wrapper">
+      <h1>首页</h1>
+      <cube-slide class="slide-wrapper">
         <cube-slide-item v-for="(item, index) in imgUrls"
                          :key="index"
                          class="slide-item">
           <img class="img"
-               v-lazy="item.url">
+               :src="item.url">
         </cube-slide-item>
       </cube-slide>
 
@@ -17,9 +17,11 @@
                    class="btn">
         Show DatePicker
       </cube-button>
+
       <!-- skeleton component -->
       <skeleton slot="skeleton"></skeleton>
     </vue-lazy-component>
+
   </div>
 </template>
 
