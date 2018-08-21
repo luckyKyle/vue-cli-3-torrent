@@ -14,9 +14,5 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import '~common/stylus/variable'
-@import '~common/stylus/mixin'
-.tip-text
-  color #c00
-  font-weight 600
+@import './main'
 </style>

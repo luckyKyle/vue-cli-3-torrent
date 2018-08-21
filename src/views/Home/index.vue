@@ -1,8 +1,7 @@
 <template>
   <div class="container">
     <vue-lazy-component v-if="imgUrls.length"
-                        :timeout="1000">
-
+                        :timeout="200">
       <h1>首页</h1>
       <cube-slide class="slide-wrapper">
         <cube-slide-item v-for="(item, index) in imgUrls"
@@ -18,10 +17,17 @@
         Show DatePicker
       </cube-button>
 
-      <!-- skeleton component -->
-      <skeleton slot="skeleton"></skeleton>
-    </vue-lazy-component>
+      <cube-button :light="true"
+                   :inline="true"
+                   :outline="true"
+                   class="btn2">
+        Button
+      </cube-button>
 
+    </vue-lazy-component>
+    <!-- skeleton component -->
+    <skeleton slot="skeleton"
+              v-if="!imgUrls.length"></skeleton>
   </div>
 </template>
 
@@ -77,11 +83,13 @@ export default {
     width 100%
     height 450px
     .slide-item
-      width inherit
-      height inherit
       .img
+        display block
         width 100%
   .btn
-    width 300px
     margin auto
+    width 750px
+  .btn2
+    margin 15px 0
+    width 150px
 </style>

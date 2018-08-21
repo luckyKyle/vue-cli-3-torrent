@@ -44,15 +44,5 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import '~common/stylus/variable'
-@import '~common/stylus/mixin'
-.scroll-list-wrap
-  height 840px
-  background #f4f4f4
-  .news-list
-    padding 0 20px
-    .item
-      nowrap()
-      height 80px
-      line-height 80px
+@import './main'
 </style>
