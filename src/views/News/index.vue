@@ -22,14 +22,22 @@
 export default {
   data() {
     return {
-      newsList: []
+      newsList: [],
+      pageTitle: '新闻'
+    }
+  },
+  metaInfo() {
+    return {
+      title: this.pageTitle,
+      titleTemplate: '%s - Test',
+      script: [{ innerHTML: 'console.log("Hey!~~!")', type: 'text/javascript' }]
     }
   },
   methods: {
     // 获取数据
     async _fetchData() {
-      const res = await this.$mock('users')
       try {
+        const res = await this.$mock('users')
         const data = res.data
         this.newsList = data.list
       } catch (err) {

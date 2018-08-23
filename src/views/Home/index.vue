@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-    <vue-lazy-component v-if="imgUrls.length"
-                        :timeout="200">
+    <vue-lazy-component v-if="imgUrls.length">
       <h1>首页</h1>
       <cube-slide class="slide-wrapper">
         <cube-slide-item v-for="(item, index) in imgUrls"
@@ -34,6 +33,7 @@
 <script type="text/ecmascript-6">
 import { getHome } from '@/api'
 import Skeleton from '@/components/Skeleton'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   components: {
     Skeleton
@@ -42,6 +42,9 @@ export default {
     return {
       imgUrls: []
     }
+  },
+  computed: {
+    ...mapGetters(['userinfo'])
   },
   methods: {
     // 触发时间选择
@@ -56,40 +59,27 @@ export default {
       }).show()
     },
     // 获取数据
-    async _fetchData() {
-      const res = await getHome()
+    async _fetchData(test) {
       try {
+        const res = await getHome()
         const data = res.data
-        console.log('data===', data)
         this.imgUrls = data.data.imgUrls
       } catch (err) {
         console.log('获取数据错误', err)
       }
-    }
+    },
+    ...mapMutations({
+      setUserInfo: 'SET_USETINFO'
+    })
   },
   created() {
-    this._fetchData()
+    setTimeout(() => {
+      this._fetchData()
+    }, 1500)
   }
 }
 </script>
 
 <style scoped lang="stylus">
-@import '~common/stylus/variable'
-@import '~common/stylus/mixin'
-.container
-  background #fff
-  overflow hidden
-  .slide-wrapper
-    width 100%
-    height 450px
-    .slide-item
-      .img
-        display block
-        width 100%
-  .btn
-    margin auto
-    width 750px
-  .btn2
-    margin 15px 0
-    width 150px
+@import './main'
 </style>

@@ -52,6 +52,11 @@ Axios.interceptors.response.use(
     } else {
       vm.$createToast({ txt: data.message }).show()
     }
+    switch (data.status) {
+    case 404:
+      console.log(100)
+      break
+    }
     return response
   },
   error => {

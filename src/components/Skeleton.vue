@@ -1,69 +1,90 @@
 <template>
-  <div class="skeleton page">
-    <div class="skeleton-nav"></div>
-    <div class="skeleton-swiper"></div>
-    <ul class="skeleton-tabs">
-      <li v-for="i in 8"
-          :key="i"
-          class="skeleton-tabs-item">
-        <span></span>
-      </li>
-    </ul>
-    <div class="skeleton-banner"></div>
-    <div v-for="i in 6"
-         :key="i"
-         class="skeleton-productions"></div>
+  <div class="sketelon">
+    <div class="animated-background">
+      <div class="background-masker header-top"></div>
+      <div class="background-masker header-left"></div>
+      <div class="background-masker header-right"></div>
+      <div class="background-masker header-bottom"></div>
+      <div class="background-masker subheader-left"></div>
+      <div class="background-masker subheader-right"></div>
+      <div class="background-masker subheader-bottom"></div>
+    </div>
   </div>
 </template>
 
-<style>
-.skeleton {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-  padding: 15px;
-  box-sizing: border-box;
-  background: #fff;
-}
-.skeleton-nav {
-  height: 45px;
-  background: #eee;
-  margin-bottom: 15px;
-}
-.skeleton-swiper {
-  height: 160px;
-  background: #eee;
-  margin-bottom: 15px;
-}
-.skeleton-tabs {
-  list-style: none;
-  padding: 0;
-  margin: 0 -15px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.skeleton-tabs-item {
-  width: 25%;
-  height: 55px;
-  box-sizing: border-box;
-  text-align: center;
-  margin-bottom: 15px;
-}
-.skeleton-tabs-item span {
-  display: inline-block;
-  width: 55px;
-  height: 55px;
-  border-radius: 55px;
-  background: #eee;
-}
-.skeleton-banner {
-  height: 60px;
-  background: #eee;
-  margin-bottom: 15px;
-}
-.skeleton-productions {
-  height: 20px;
-  margin-bottom: 15px;
-  background: #eee;
-}
+<style scoped lang="stylus">
+@import '~common/stylus/variable'
+@import '~common/stylus/mixin'
+.sketelon
+  background #fff
+  border-color #e5e6e9 #dfe0e4 #d0d1d5
+  border-radius 3px
+  padding 12px
+  margin 0 auto
+  max-width 472px
+  min-height 200px
+@keyframes placeHolderShimmer
+  0%
+    background-position -468px 0
+  100%
+    background-position 468px 0
+.animated-background
+  animation placeHolderShimmer 1s linear infinite
+  animation-timing-function linear
+  background #f6f7f8
+  background linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%)
+  background-size 800px 104px
+  height 40px
+  position relative
+.background-masker
+  background #fff
+  position absolute
+&.header-top, &.header-bottom, &.subheader-bottom
+  top 0
+  left 40px
+  right 0
+  height 10px
+&.header-left, &.subheader-left, &.header-right, &.subheader-right
+  top 10px
+  left 40px
+  height 8px
+  width 10px
+&.header-bottom
+  top 18px
+  height 6px
+&.subheader-left, &.subheader-right
+  top 24px
+  height 6px
+&.header-right, &.subheader-right
+  width auto
+  left 300px
+  right 0
+&.subheader-right
+  left 230px
+&.subheader-bottom
+  top 30px
+  height 10px
+&.content-top, &.content-second-line, &.content-third-line, &.content-second-end, &.content-third-end, &.content-first-end
+  top 40px
+  left 0
+  right 0
+  height 6px
+&.content-top
+  height 20px
+&.content-first-end, &.content-second-end, &.content-third-end
+  width auto
+  left 380px
+  right 0
+  top 60px
+  height 8px
+&.content-second-line
+  top 68px
+&.content-second-end
+  left 420px
+  top 74px
+&.content-third-line
+  top 82px
+&.content-third-end
+  left 300px
+  top 88px
 </style>

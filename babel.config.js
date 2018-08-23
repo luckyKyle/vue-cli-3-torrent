@@ -5,7 +5,8 @@ module.exports = {
   'plugins': [
     ['transform-modules', {
       'cube-ui': {
-        'transform': 'cube-ui/lib/${member}',
+        // eslint-disable-next-line
+        'transform': "cube-ui/lib/${member}",
         'kebabCase': true,
         'style': {
           'ignore': ['create-api', 'better-scroll']

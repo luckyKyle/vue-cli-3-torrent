@@ -1,17 +1,12 @@
 module.exports = {
   '*.js': [
     'eslint --fix',
-    'prettier --write',
     'git add'
   ],
-  '*.json': ['prettier --write', 'git add'],
   '*.vue': [
     'eslint --fix',
-    'stylelint --fix',
-    'prettier --write',
-    'git add',
-    'yarn unit --bail --findRelatedTests'
+    'git add'
   ],
-  '*.styl': ['stylelint --fix', 'prettier --write', 'git add'],
+  '*.styl': ['stylelint --fix', 'git add'],
   '*.{png,jpeg,jpg,gif,svg}': ['imagemin-lint-staged', 'git add']
 }

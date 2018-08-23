@@ -17,7 +17,7 @@
 + **axios**  => *支持ajax数据请求和数据劫持*
 + **mock.js** => *支持前端mock静态数据*
 + **.editorConfig** => *支持编辑器统一代码格式化*
-+ **Vue-Meta**  => *支持SPA下单独设置页面title以及元信息*
++ **vue-meta**  => *支持SPA下单独设置页面title以及元信息*
 + **husky + lint-staged**  => *支持Git钩子验证*
 + **vue-lazyload**  => *支持图片懒加载*
 + **vue-lazy-component**  => *支持模版懒加载，可做骨架屏优化*
@@ -46,6 +46,87 @@
 + **SSR**  => *支持服务端渲染*
 + **Koa2/egg**  => *支持中间层*
 + ...
+
+## 目录结构
+
+
+```
+├── package.json					# npm包管理文件
+├── .postcssrc.js					# postcss配置文件
+├── .eslintrc.js					# eslint配置文件
+├── .editorconfig					# editorconfig配置文件
+├── lint-staged.config.js			# postcss配置文件
+├── babel.config.js				# babel配置文件
+│── main.js                        # vue项目入口文件
+├── build		 					# webpack配置
+│   ├── config.js					# 参数配置文件
+│   ├── webpack.base.conf.js		# 公共打包执行任务
+│   ├── webpack.dev.conf.js		# 开发环境打包执行任务
+│   └── webpack.prod.conf.js		# 生产环境打包执行任务
+├── mock							
+│   ├── data						# mock接口
+│   │   └── userinfo.js
+│   └── index.js					# mock配置文件
+├── public							
+│   ├── favicon.ico
+│   └── index.html					# 入口页面
+├── src
+│   ├── App.vue					# 入口组件
+│   ├── api						# 接口请求处理
+│   │   ├── axios.js				# axios请求拦截封装
+│   │   ├── config.js				# axios请求参数配置
+│   │   └── index.js				# 接口请求封装
+│   ├── common						
+│   │   ├── image
+│   │   │   └── default.png
+│   │   └── stylus
+│   │       ├── base.styl			# 公共全局样式
+│   │       ├── border.styl			# 移动端1像素封装
+│   │       ├── index.styl			# 入口文件
+│   │       ├── mixin.styl			# 常用mixin<长期维护>
+│   │       ├── reset.styl			# 接口请求封装
+│   │       └── variable.styl		# 全局定义变量
+│   ├── components				
+│   │   └── Skeleton.vue			# 骨架屏组件
+│   ├── mock						
+│   │   ├── data					# mock接口
+│   │   │   └── users.js
+│   │   ├── index.js				# mock出口方法
+│   │   └── mock.js				# mock拦截处理
+│   ├── routers						
+│   │   └── index.js				# vue-router配置
+│   ├── store						
+│   │   ├── modules				# 功能模块
+│   │   ├── actions.js				# 根级别的action
+│   │   ├── getters.js				# 根级别的getters
+│   │   ├── index.js				# store入口
+│   │   ├── mutation-types.js		# 根级别的mutation-types
+│   │   ├── mutations.js			# 根级别的mutations
+│   │   └── state.js				# 根级别的state
+│   ├── utils						# 工具方法库<长期维护>
+│   │   ├── array.js
+│   │   ├── cache.js
+│   │   ├── common.js
+│   │   ├── date.js
+│   │   ├── dom.js
+│   │   ├── is.js
+│   │   ├── object.js
+│   │   ├── storage.js
+│   │   ├── string.js
+│   │   └── url.js
+│   └── views						# 业务页面组件
+│       ├── Home
+│       │   └── index.vue
+│       │   └── main.styl
+│       ├── Login
+│       │   └── index.vue
+│       │   └── main.styl
+│       ├── My
+│       │   └── index.vue
+│       │   └── main.styl
+└── vue.config.js				    #vue全局配置文件
+```
+
 ---
 
 # Base 脚手架
@@ -85,6 +166,15 @@ if (options.exclude) { // 添加对exclude选项的处理
     exclude: /(\/|\\)(node_modules)(\/|\\)/  // 忽略node_modules
  }
 ```
+> 编译前
+
+![stylus](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/7.png?raw=true)
+
+> 编译后
+
+![css1](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/8.png?raw=true)
+![css2](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/9.png?raw=true)
+
 
 ## Stylus + Stylus-loader
 
@@ -103,6 +193,7 @@ if (process.env.NODE_ENV !== 'production') {
   console.log(vConsole.version)
 }
 ```
+![vconsole](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/6.jpg?raw=true)
 
 
 ## Lodash  
@@ -271,7 +362,7 @@ trim_trailing_whitespace = true #设为true表示会除去换行行首的任意�
  编辑器一样还是推荐使用VsCode，里面有个插件支持可以安装下。
 ![editorConfig for VsCode](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/2.png?raw=true)
 
-## Vue-Meta
+## vue-meta
 > 视情况使用，一般在PC端应用的相对比较多。在`main.js`里引入后全局注册。
 ```js
 import VueMeta from 'vue-meta'
@@ -297,9 +388,11 @@ export default {
     }
   }
 }
-![title](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/3.png?raw=true)
-![控制台console](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/4.png?raw=true)
 ```
+![title](https://raw.githubusercontent.com/kpengWang/Blog-images-storage/master/2018-08-17/3.png)
+
+![控制台console](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/4.png?raw=true)
+
 
 ## husky + lint-staged 
 
