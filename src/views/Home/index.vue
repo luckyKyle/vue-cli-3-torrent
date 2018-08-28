@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <vue-lazy-component v-if="imgUrls.length">
+    <vue-lazy-component v-if="imgList.length">
       <h1>首页</h1>
       <cube-slide class="slide-wrapper">
-        <cube-slide-item v-for="(item, index) in imgUrls"
+        <cube-slide-item v-for="(item, index) in imgList"
                          :key="index"
                          class="slide-item">
           <img class="img"
@@ -26,7 +26,7 @@
     </vue-lazy-component>
     <!-- skeleton component -->
     <skeleton slot="skeleton"
-              v-if="!imgUrls.length"></skeleton>
+              v-if="!imgList.length"></skeleton>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      imgUrls: []
+      imgList: []
     }
   },
   computed: {
@@ -59,11 +59,11 @@ export default {
       }).show()
     },
     // 获取数据
-    async _fetchData(test) {
+    async _fetchData() {
       try {
         const res = await getHome()
         const data = res.data
-        this.imgUrls = data.data.imgUrls
+        this.imgList = data.data.imgList
       } catch (err) {
         console.log('获取数据错误', err)
       }

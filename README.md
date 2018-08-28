@@ -8,7 +8,9 @@
 ## Base
 +  **vue-cli3.0**
 
+
 ## 注入插件
+
 + **PostCss** => *支持px单位自动换算*
 + **Stylus + Stylus-loader** => *支持Stylus语法糖*
 + **VConsole** => *支持移动端调试控制台*
