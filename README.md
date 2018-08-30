@@ -140,33 +140,34 @@
 
 ## PostCss
 
-> 这里有一个坑需要注意一下,踩了一坑，由于`postcss-px-to-viewport`并没有`exclude`配置项，所以会把`node_modules`里的ui库文件的css也包含进去进行转换，控制台会出现warning，所以需要做一些必要的处理。
-
-![warning](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/1.png?raw=true)
-
-```js
-
-// 此段代码在依赖包postcss-px-to-viewport/index.js里 大约第30行
-...
-css.walkDecls(function (decl, i) {
-
-if (options.exclude) { // 添加对exclude选项的处理
-    if (Object.prototype.toString.call(options.exclude) !== '[object RegExp]') {
-      throw new Error('options.exclude should be RegExp!')
-    }
-    if (decl.source.input.file.match(options.exclude) !== null) return;
-}
-...
+> 这里是使用了`postcss-pxtorem`插件，开发时直接按照实际 效果图的px单位就行了
 
 ```
-然后就在`.postcssrc`配置文件里添加
+
+```
+
+`main.js`里引入'rem.js'
 
 ```js
-...
- "postcss-px-to-viewport":{
-     ...
-    exclude: /(\/|\\)(node_modules)(\/|\\)/  // 忽略node_modules
- }
+import './common/js/rem'
+```
+
+
+```js
+// 基准大小
+const baseSize = 32
+// 设置 rem 函数
+function setRem() {
+  // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
+  const scale = document.documentElement.clientWidth / 750
+  // 设置页面根节点字体大小
+  document.documentElement.style.fontSize = (baseSize * Math.min(scale, 2)) + 'px'
+}
+// 初始化
+setRem()
+
+// 监听窗口大小时重新设置 rem
+window.onresize = () => { setRem() }
 ```
 > 编译前
 

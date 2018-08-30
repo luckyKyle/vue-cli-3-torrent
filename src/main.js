@@ -14,6 +14,7 @@ import axios from '@/api/axios'
 import mock from '@/mock'
 
 import 'nprogress/nprogress.css'
+import './common/js/rem'
 import './common/stylus/index.styl'
 
 // 引入 Style 加载基础样式
