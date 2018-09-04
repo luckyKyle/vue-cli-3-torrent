@@ -2,12 +2,15 @@
   <div class="container">
     <vue-lazy-component v-if="imgList.length">
       <h1>首页</h1>
-      <cube-slide class="slide-wrapper">
+      <cube-slide class="slide-wrapper"
+                  :options="options">
         <cube-slide-item v-for="(item, index) in imgList"
                          :key="index"
                          class="slide-item">
-          <img class="img"
-               :src="item.url">
+          <div @click="selelctSlide(index)">
+            <img class="img"
+                 :src="item.url">
+          </div>
         </cube-slide-item>
       </cube-slide>
 
@@ -40,7 +43,12 @@ export default {
   },
   data() {
     return {
-      imgList: []
+      imgList: [],
+      options: {
+        click: true,
+        listenScroll: true,
+        probeType: 3
+      }
     }
   },
   computed: {
@@ -57,6 +65,9 @@ export default {
         onSelect: this.selectHandle, // 确定回调
         onCancel: this.cancelHandle // 取消回调
       }).show()
+    },
+    selelctSlide(index) {
+      console.log(index)
     },
     // 获取数据
     async _fetchData() {

@@ -14,7 +14,7 @@
 + **PostCss** => *支持px单位自动换算*
 + **Stylus + Stylus-loader** => *支持Stylus语法糖*
 + **VConsole** => *支持移动端调试控制台*
-+ **Lodash**  => *支持Js工具库*
++ **Lodash-es**  => *支持Js工具库*
 + **NProgress** => *支持页面跳转顶部loading*
 + **axios**  => *支持ajax数据请求和数据劫持*
 + **mock.js** => *支持前端mock静态数据*
@@ -37,6 +37,7 @@
 ## Webpack 优化
 + **Happypack**  => *多进程打包*
 + **webpack-parallel-unglify-plugin** => *利用缓存快速压缩*
++ **webpack-deep-scope-plugin** => *提高webpack tree-shaking的效率*
 + ...
 
 
@@ -57,13 +58,13 @@
 ├── .postcssrc.js					# postcss配置文件
 ├── .eslintrc.js					# eslint配置文件
 ├── .editorconfig					# editorconfig配置文件
-├── lint-staged.config.js			# postcss配置文件
+├── lint-staged.config.js			# lint-staged配置文件
 ├── babel.config.js				# babel配置文件
-│── main.js                        # vue项目入口文件
+│── main.js                     # 项目入口文件
 ├── build		 					# webpack配置
 │   ├── config.js					# 参数配置文件
 │   ├── webpack.base.conf.js		# 公共打包执行任务
-│   ├── webpack.dev.conf.js		# 开发环境打包执行任务
+│   ├── webpack.dev.conf.js		    # 开发环境打包执行任务
 │   └── webpack.prod.conf.js		# 生产环境打包执行任务
 ├── mock							
 │   ├── data						# mock接口
@@ -116,7 +117,7 @@
 │   │   ├── storage.js
 │   │   ├── string.js
 │   │   └── url.js
-│   └── views						# 业务页面组件
+│   └── views						# 页面组件
 │       ├── Home
 │       │   └── index.vue
 │       │   └── main.styl
@@ -251,7 +252,7 @@ router.afterEach(transition => {
 ```
 
 ## axios  
-> axios除了接口请求，主要还做了拦截处理，利于接口数据异常统一管理，相关代码都在`src/api`文件夹内。
+> axios除了做接口请求，主要还做了拦截处理，利于接口数据异常统一管理，相关代码都在`src/api`文件夹内。
 
 请求拦截的逻辑放在`src/api/axios.js`里。
 
@@ -369,7 +370,6 @@ trim_trailing_whitespace = true #设为true表示会除去换行行首的任意�
 > 视情况使用，一般在PC端应用的相对比较多。在`main.js`里引入后全局注册。
 ```js
 import VueMeta from 'vue-meta'
-
 
 // 单独设置页面的title和meta信息
 Vue.use(VueMeta)
@@ -535,7 +535,7 @@ Vue.use(Toast)
 + **webpack.prod.conf.js**  走生产环境的配置文件
 + **config.js**           配置参数
 
-## Happypack 
+## happypack 
 > 通过多进程模型，来加速代码构建，代码在`webpack.prod.conf.js`文件中，主要使用了Happypack的`ThreadPool`方法，HappyThreadPool(“进程池”) 对象来管理生成的子进程对象。利用缓存来使得rebuild 更快。
 
 
@@ -584,3 +584,5 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
     ]
   }
 ```
+## webpack-deep-scope-plugin
+> 
