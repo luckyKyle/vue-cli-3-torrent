@@ -35,12 +35,8 @@
 
 <script type="text/ecmascript-6">
 import { getHome } from '@/api'
-import Skeleton from '@/components/Skeleton'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
-  components: {
-    Skeleton
-  },
   data() {
     return {
       imgList: [],
