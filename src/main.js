@@ -3,10 +3,10 @@ import App from './App.vue'
 import router from '@/routers'
 import store from '@/store'
 
-// import VueMeta from 'vue-meta'
-// import VConsole from 'vconsole'
-// import VueLazyLoad from 'vue-lazyload'
-// import VueLazyComponent from '@xunlei/vue-lazy-component'
+import VueMeta from 'vue-meta'
+import VConsole from 'vconsole'
+import VueLazyLoad from 'vue-lazyload'
+import VueLazyComponent from '@xunlei/vue-lazy-component'
 
 import fastclick from 'fastclick'
 import axios from '@/api/axios'
@@ -39,28 +39,27 @@ Vue.use(DatePicker)
 Vue.use(Slide)
 
 // 单独设置页面的title和meta信息
-// Vue.use(VueMeta)
+Vue.use(VueMeta)
 
 // 模版懒加载 可做骨架屏
-// Vue.use(VueLazyComponent)
+Vue.use(VueLazyComponent)
 
 // 图片懒加载
-// Vue.use(VueLazyLoad, {
-//   loading: require('./common/image/default.png')
-// })
+Vue.use(VueLazyLoad, {
+  loading: require('./common/image/default.png')
+})
 
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 Vue.prototype.$mock = mock
-// Vue.prototype._ = lodash
 
 fastclick.attach(document.body)
 
 // 开发环境开启vConsole
 if (process.env.NODE_ENV !== 'production') {
-  // const vConsole = new VConsole()
-  // console.log(vConsole.version)
+  const vConsole = new VConsole()
+  console.log(vConsole.version)
 }
 
 new Vue({
