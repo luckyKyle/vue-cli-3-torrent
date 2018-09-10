@@ -9,12 +9,12 @@ const resolve = (dir) => path.join(__dirname, dir)
 module.exports = {
   module: {
     rules: [
-    {
-      test: /\.js[x]?$/,
-      include: [resolve('src')],
-      exclude: /node_modules/,
-      loader: 'happypack/loader?id=happybabel'
-    }]
+      {
+        test: /\.js[x]?$/,
+        include: [resolve('src')],
+        exclude: /node_modules/,
+        loader: 'happypack/loader?id=happybabel'
+      }]
   },
   plugins: [
     new HappyPack({

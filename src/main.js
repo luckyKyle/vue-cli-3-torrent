@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from '@/routers'
+import router from '@/router'
 import store from '@/store'
 
 import VueMeta from 'vue-meta'
@@ -12,10 +12,10 @@ import fastclick from 'fastclick'
 import axios from '@/api/axios'
 import mock from '@/mock'
 
-import 'nprogress/nprogress.css'
 import './common/js/rem'
 import './common/stylus/index.styl'
 import './components/register'
+import '@/router/permission'
 
 // 引入 Style 加载基础样式
 import {
@@ -57,7 +57,7 @@ Vue.prototype.$mock = mock
 fastclick.attach(document.body)
 
 // 开发环境开启vConsole
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
   const vConsole = new VConsole()
   console.log(vConsole.version)
 }

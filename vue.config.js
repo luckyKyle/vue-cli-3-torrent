@@ -3,24 +3,32 @@ const DEV = process.env.NODE_ENV !== 'production'
 const webpackDevConf = require('./build/webpack.dev.conf')
 const webpackProdConf = require('./build/webpack.prod.conf')
 const TransformModulesPlugin = require('webpack-transform-modules-plugin')
+const PostCompilePlugin = require('webpack-post-compile-plugin')
+
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
   chainWebpack: config => {
     // 修改插件
+    const conf = config.toConfig()
+    // 自定义cube-ui样式
+    config
+      .plugin('post-compile')
+      .use(PostCompilePlugin, [{
+        config: {
+          module: {
+            rules: [...conf.module.rules]
+          }
+        }
+      }])
+
     config
       .plugin('transform-modules')
       .use(TransformModulesPlugin)
 
     config.resolve.alias
-      .set('cube-ui', 'cube-ui/lib')
       .set('@', resolve('src'))
-      .set('views', resolve('src/views'))
-      .set('api', resolve('src/api'))
-      .set('components', resolve('src/components'))
       .set('common', resolve('src/common'))
-      .set('base', resolve('src/common'))
-      .set('utils', resolve('src/ts/utils'))
   },
   configureWebpack(config) {
     // 根据Node变量环境返回对应的自定义配置来合并config
@@ -31,7 +39,9 @@ module.exports = {
     // css预设器配置项
     loaderOptions: {
       stylus: {
-        'resolve url': true
+        'resolve url': true,
+        // 这里 新增 import 配置项，指向自定义主题文件
+        import: [path.resolve(__dirname, './src/common/stylus/theme')]
       }
     }
   },

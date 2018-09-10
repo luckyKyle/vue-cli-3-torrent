@@ -12,6 +12,14 @@
 </template>
 
 <script>
+export default {
+  metaInfo() {
+    return {
+      title: '玖富犇犇',
+      titleTemplate: '%s | 开户'
+    }
+  }
+}
 </script>
 
 <style lang="stylus">
