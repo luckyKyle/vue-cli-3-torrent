@@ -63,9 +63,6 @@ export default {
         onCancel: this.cancelHandle // 取消回调
       }).show()
     },
-    selelctSlide(index) {
-      console.log(index)
-    },
     // 获取数据
     async _fetchData() {
       try {
