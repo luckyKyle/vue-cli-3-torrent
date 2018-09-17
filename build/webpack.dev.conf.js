@@ -1,6 +1,4 @@
 const path = require('path')
-
-const resolve = (dir) => path.join(__dirname, dir)
-module.exports = {
-
-}
+const merge = require('webpack-merge')
+const base = require('./webpack.base.conf.js')
+module.exports = merge(base, {})
