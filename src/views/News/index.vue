@@ -8,6 +8,7 @@
         <ul class="news-list">
           <li class="item border-bottom"
               v-for="(item, index) in newsList"
+              px-border="bottom"
               :key="index">
             {{item.userName}}
           </li>
@@ -37,11 +38,11 @@ export default {
     // 获取数据
     async _fetchData() {
       try {
-        const res = await this.$mock('users')
+        const res = await this.$http.get('users')
         const data = res.data
         this.newsList = data.list
       } catch (err) {
-        console.log('获取数据错误', err)
+        console.log('获取数据错误2', err)
       }
     }
   },

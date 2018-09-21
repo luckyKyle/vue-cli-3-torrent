@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 import MockAdapter from 'axios-mock-adapter'
-import Axios from './mock'
+import Axios from '@/api/axios'
 
 /**********************************************
  * 具体配置参考以下链接，可自行搭配参数
@@ -28,4 +28,4 @@ const createInterface = new CreateInterface()
 
 createInterface.init()
 
-export default Axios
+export default createInterface.mocker

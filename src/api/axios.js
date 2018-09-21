@@ -29,10 +29,18 @@ Axios.interceptors.request.use(
       cookie.set('token', token, 1 / 12) // 用户每次操作，都将cookie设置成2小时
       config.headers.Authorization = token // 每个http header都加上token
     }
+
+    // 防止get请求获取数据304缓存，必须保证状态为200
+    if (config.method === 'get') {
+      if (config.params) {
+        config.params['_'] = +new Date()
+      } else {
+        config.params = { '_': +new Date() }
+      }
+    }
     return config
   },
   error => {
-    console.log('error')
     vm.$createToast({ txt: error.data.message }).show()
     return Promise.reject(error)
   }
@@ -43,25 +51,28 @@ Axios.interceptors.response.use(
   response => {
     console.log('response', response)
     let data = response.data
-    // 判断返回数据格式
-    if (typeof data === 'string' && data !== '') {
-      data = JSON.parse(data)
-    }
+
     if (data.code === ERR_OK) {
-      console.log('后台原始数据===', response.data)
+      // 判断返回数据格式
+      if (typeof data === 'string' && data !== '') {
+        data = JSON.parse(data)
+      }
+      console.log('后台原始数据===', data)
+      return data
     } else {
-      vm.$createToast({ txt: data.message }).show()
+      vm.$createToast({ type: 'error', txt: data.message }).show()
+      return Promise.reject(data)
     }
-    switch (data.status) {
-    case 404:
-      console.log(100)
-      break
-    }
-    return response
   },
   error => {
-    console.log('error.response', error.response.message)
-    return Promise.reject(error.response)
+    console.log('response.error：', error)
+    let message = error.message
+    // 超时错误
+    if (error.code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
+      message = '网络请求超时，请稍后重试'
+      vm.$createToast({ type: 'error', txt: message }).show()
+    }
+    return Promise.reject(error)
   }
 )
 

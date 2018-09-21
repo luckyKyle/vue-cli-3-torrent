@@ -1,69 +1,88 @@
+/*
+ * pxborder.css -https://github.com/JofunLiang/pxborder
+ * Version - 1.0.0
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ * Copyright (c) 2018 jofun Liang
+ */
 $border-color = #d7d7d7
 
-.border, .border-top, .border-right, .border-bottom, .border-left, .border-topbottom, .border-rightleft, .border-topleft, .border-rightbottom, .border-topright, .border-bottomleft
+/* utils */
+[px-border]
   position relative
-.border::after, .border-top::after, .border-right::after, .border-bottom::after, .border-left::after, .border-topbottom::after, .border-topbottom::after, .border-rightleft::after, .border-rightleft::after, .border-topleft::after, .border-topleft::after, .border-rightbottom::after, .border-rightbottom::after, .border-topright::after, .border-topright::after, .border-bottomleft::after, .border-bottomleft::after
-  content '\0020'
-  overflow hidden
-  position absolute
-/* border
- * 因，边框是由伪元素区域遮盖在父级
- * 故，子级若有交互，需要对子级设置
- * 定位 及 z轴
- */
-.border::after
+  border-width 0
+  border-color $border-color
+[px-border]:after
+  display block
+  content ''
+  width 100%
+  height 100%
+  border-radius inherit
+  border-color inherit
+  border-style solid
+  border-width 0
   box-sizing border-box
-  top 0
+  position absolute
   left 0
-  height 100%
-  width 100%
-  border 1px solid $border-color
-  transform-origin 0 0
-.border-top::after, .border-bottom::after, .border-topbottom::after, .border-topbottom::after, .border-topleft::after, .border-rightbottom::after, .border-topright::after, .border-bottomleft::after
-  left 0
-  width 100%
-  height 1px
-.border-right::after, .border-left::after, .border-rightleft::after, .border-rightleft::after, .border-topleft::after, .border-rightbottom::after, .border-topright::after, .border-bottomleft::after
   top 0
-  width 1px
-  height 100%
-.border-top::after, .border-topbottom::after, .border-topleft::after, .border-topright::after
-  border-top 1px solid $border-color
-  transform-origin 0 0
-.border-right::after, .border-rightbottom::after, .border-rightleft::after, .border-topright::after
-  border-right 1px solid $border-color
-  transform-origin 100% 0
-.border-bottom::after, .border-topbottom::after, .border-rightbottom::after, .border-bottomleft::after
-  border-bottom 1px solid $border-color
-  transform-origin 0 100%
-.border-left::after, .border-topleft::after, .border-rightleft::after, .border-bottomleft::after
-  border-left 1px solid $border-color
-  transform-origin 0 0
-.border-top::after, .border-topbottom::after, .border-topleft::after, .border-topright::after
-  top 0
-.border-right::after, .border-rightleft::after, .border-rightbottom::after, .border-topright::after
-  right 0
-.border-bottom::after, .border-topbottom::after, .border-rightbottom::after, .border-bottomleft::after
-  bottom 0
-.border-left::after, .border-rightleft::after, .border-topleft::after, .border-bottomleft::after
-  left 0
-@media (max--moz-device-pixel-ratio: 1.49), (-webkit-max-device-pixel-ratio: 1.49), (max-device-pixel-ratio: 1.49), (max-resolution: 143dpi), (max-resolution: 1.49dppx)
-  /* 默认值，无需重置 */
-@media (min--moz-device-pixel-ratio: 1.5) and (max--moz-device-pixel-ratio: 2.49), (-webkit-min-device-pixel-ratio: 1.5) and (-webkit-max-device-pixel-ratio: 2.49), (min-device-pixel-ratio: 1.5) and (max-device-pixel-ratio: 2.49), (min-resolution: 144dpi) and (max-resolution: 239dpi), (min-resolution: 1.5dppx) and (max-resolution: 2.49dppx)
-  .border::after
+/* setting border-width */
+[px-border=top]:after
+  border-top-width 1px
+[px-border=bottom]:after
+  border-bottom-width 1px
+[px-border=level]:after
+  border-top-width 1px
+  border-bottom-width 1px
+[px-border=left]:after
+  border-left-width 1px
+[px-border=right]:after
+  border-right-width 1px
+[px-border=vertical]:after
+  border-left-width 1px
+  border-right-width 1px
+[px-border=all]:after
+  border-width 1px
+/* media responsed */
+@media (-webkit-min-device-px-ratio: 1.25), (-o-min-device-px-ratio: 125 / 100), (min-moz-device-px-ratio: 1.25), (min-device-px-ratio: 1.25)
+  [px-border]:after
+    width 125%
+    height 125%
+    -webkit-transform scale(0.8, 0.8)
+    transform scale(0.8, 0.8)
+    -webkit-transform-origin left top
+    transform-origin left top
+@media (-webkit-min-device-px-ratio: 1.5), (-o-min-device-px-ratio: 150 / 100), (min-moz-device-px-ratio: 1.5), (min-device-px-ratio: 1.5)
+  [px-border]:after
+    width 150%
+    height 150%
+    -webkit-transform scale(0.66666, 0.66666)
+    transform scale(0.66666, 0.66666)
+@media (-webkit-min-device-px-ratio: 2), (-o-min-device-px-ratio: 200 / 100), (min-moz-device-px-ratio: 2), (min-device-px-ratio: 2)
+  [px-border]:after
     width 200%
     height 200%
-    transform scale(0.5)
-  .border-top::after, .border-bottom::after, .border-topbottom::after, .border-topbottom::after, .border-topleft::after, .border-rightbottom::after, .border-topright::after, .border-bottomleft::after
-    transform scaleY(0.5)
-  .border-right::after, .border-left::after, .border-rightleft::after, .border-rightleft::after, .border-topleft::after, .border-rightbottom::after, .border-topright::after, .border-bottomleft::after
-    transform scaleX(0.5)
-@media (min--moz-device-pixel-ratio: 2.5), (-webkit-min-device-pixel-ratio: 2.5), (min-device-pixel-ratio: 2.5), (min-resolution: 240dpi), (min-resolution: 2.5dppx)
-  .border::after
+    -webkit-transform scale(0.5, 0.5)
+    transform scale(0.5, 0.5)
+@media (-webkit-min-device-px-ratio: 2.5), (-o-min-device-px-ratio: 250 / 100), (min-moz-device-px-ratio: 2.5), (min-device-px-ratio: 2.5)
+  [px-border]:after
+    width 250%
+    height 250%
+    -webkit-transform scale(0.4, 0.4)
+    transform scale(0.4, 0.4)
+@media (-webkit-min-device-px-ratio: 3), (-o-min-device-px-ratio: 300 / 100), (min-moz-device-px-ratio: 3), (min-device-px-ratio: 3)
+  [px-border]:after
     width 300%
     height 300%
-    transform scale(0.33333)
-  .border-top::after, .border-bottom::after, .border-topbottom::after, .border-topbottom::after, .border-topleft::after, .border-rightbottom::after, .border-topright::after, .border-bottomleft::after
-    transform scaleY(0.33333)
-  .border-right::after, .border-left::after, .border-rightleft::after, .border-rightleft::after, .border-topleft::after, .border-rightbottom::after, .border-topright::after, .border-bottomleft::after
-    transform scaleX(0.33333)
+    -webkit-transform scale(0.33333, 0.33333)
+    transform scale(0.33333, 0.33333)
+@media (-webkit-min-device-px-ratio: 3.5), (-o-min-device-px-ratio: 350 / 100), (min-moz-device-px-ratio: 3.5), (min-device-px-ratio: 3.5)
+  [px-border]:after
+    width 350%
+    height 350%
+    -webkit-transform scale(0.28571, 0.28571)
+    transform scale(0.28571, 0.28571)
+@media (-webkit-min-device-px-ratio: 4), (-o-min-device-px-ratio: 400 / 100), (min-moz-device-px-ratio: 4), (min-device-px-ratio: 4)
+  [px-border]:after
+    width 400%
+    height 400%
+    -webkit-transform scale(0.25, 0.25)
+    transform scale(0.25, 0.25)

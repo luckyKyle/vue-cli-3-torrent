@@ -1,8 +1,9 @@
 // 背景图片
 bg-image($url)
-  background-image url($url + '@2x.png')
+  background-repeat no-repeat
+  background-image url('../../common/image/'+$url + '@2x.png')
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
-    background-image url($url + '@3x.png')
+    background-image url('../../common/image/'+$url + '@3x.png')
 
 // 锁定图片尺寸
 fix-image-size()
@@ -35,16 +36,6 @@ no-wrap()
   overflow hidden
   white-space nowrap
 
-// 清楚按钮默认样式
-btn-normal()
-  background transparent
-  box-shadow none
-  border-radius 0
-  border none
-  padding 0
-  &::after
-    display none
-
 // 扩展点击区域
 extend-click()
   position relative
@@ -70,7 +61,12 @@ posCenter(){
  position absolute
  top 50%
  left 50%
- transform translate(-50%,-60%)
+ transform translate(-50%,-50%)
+}
+posX(){
+ position absolute
+ left 50%
+ transform translateX(-50%)
 }
 
 //垂直居中
@@ -87,11 +83,11 @@ posY($offset = 0, $left = true)
 
 // 等腰三角形
 triangle($width, $height, $color, $direction)
-  $width: $width/2
-  $color-border-style: $height solid $color
-  $transparent-border-style: $width solid transparent
-  height: 0
-  width: 0
+  $width $width/2
+  $color-border-style $height solid $color
+  $transparent-border-style $width solid transparent
+  height 0
+  width 0
   if $direction==up {
     border-bottom: $color-border-style
     border-left: $transparent-border-style
@@ -111,3 +107,33 @@ triangle($width, $height, $color, $direction)
     border-right: $color-border-style
     border-top: $transparent-border-style
     border-bottom: $transparent-border-style
+
+borderY($width,$dir=top,$color=#d7d7d7)
+  position absolute
+  top 50%
+  right 0
+  transform translateY(-50%)  scaleX(0.5)
+  content '\0020'
+  height $height
+  height 1px
+  if $dir==top
+    border-top 1px $color solid
+  else
+    border-bottom 1px $color solid
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+    transform translateY(-50%)  scaleX(0.33333)
+borderX($height,$dir=right,$color=#d7d7d7)
+    position absolute
+    top 50%
+    right 0
+    transform translateY(-50%)  scaleX(0.5)
+    content '\0020'
+    height $height
+    width 1px
+    overflow hidden
+    if $dir==right
+      border-right 1px $color solid
+    else
+      border-left 1px $color solid
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+      transform translateY(-50%)  scaleX(0.33333)
