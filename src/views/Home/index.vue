@@ -1,32 +1,31 @@
 <template>
   <div class="container">
-    <vue-lazy-component v-if="imgList.length">
-      <h1>首页</h1>
-      <cube-slide class="slide-wrapper"
-                  :options="options">
-        <cube-slide-item v-for="(item, index) in imgList"
-                         :key="index"
-                         class="slide-item">
-          <div @click="selelctSlide(index)">
-            <img class="img"
-                 :src="item.url">
-          </div>
-        </cube-slide-item>
-      </cube-slide>
+    <h1>首页</h1>
+    <cube-slide class="slide-wrapper"
+                :options="options">
+      <cube-slide-item v-for="(item, index) in imgList"
+                       :key="index"
+                       class="slide-item">
+        <div @click="selelctSlide(index)">
+          <img class="img"
+               :src="item.url">
+        </div>
+      </cube-slide-item>
+    </cube-slide>
 
-      <cube-button @click.native="showDatePicker"
-                   class="btn">
-        Show DatePicker
-      </cube-button>
+    <cube-button @click.native="showDatePicker"
+                 class="btn">
+      Show DatePicker
+    </cube-button>
 
-      <cube-button :light="true"
-                   :inline="true"
-                   :outline="true"
-                   class="btn2">
-        Button
-      </cube-button>
+    <cube-button :light="true"
+                 :inline="true"
+                 :outline="true"
+                 @click="handleTestClick"
+                 class="btn2">
+      Button
+    </cube-button>
 
-    </vue-lazy-component>
     <!-- skeleton component -->
     <skeleton slot="skeleton"
               v-if="!imgList.length"></skeleton>
@@ -36,7 +35,7 @@
 <script type="text/ecmascript-6">
 import { getHome } from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
-
+import { chunk } from 'lodash-es'
 export default {
   data() {
     return {
@@ -52,6 +51,13 @@ export default {
     ...mapGetters(['userinfo'])
   },
   methods: {
+    // 点击按钮
+    handleTestClick() {
+      console.log(chunk(['a', 'b', 'c', 'd'], 3))
+      // debounce(() => {
+      //   console.log('按钮按钮')
+      // }, 200)
+    },
     // 触发时间选择
     showDatePicker() {
       this.$createDatePicker({

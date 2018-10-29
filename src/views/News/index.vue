@@ -6,7 +6,7 @@
          v-if="newsList.length">
       <cube-scroll ref="scroll">
         <ul class="news-list">
-          <li class="item border-bottom"
+          <li class="item border-bottom-1px"
               v-for="(item, index) in newsList"
               px-border="bottom"
               :key="index">

@@ -1,10 +1,8 @@
 import axios from 'axios'
 import Qs from 'qs'
 import cookie from '@/utils/cache'
-import Vue from 'vue'
+import { toastError } from '@/utils/common'
 import { MAX_TIME_OUT, ERR_OK, HOST } from './config'
-
-const vm = new Vue()
 
 const Axios = axios.create({
   baseURL: HOST, // 前缀
@@ -41,7 +39,7 @@ Axios.interceptors.request.use(
     return config
   },
   error => {
-    vm.$createToast({ txt: error.data.message }).show()
+    toastError(error.data.message)
     return Promise.reject(error)
   }
 )
@@ -49,7 +47,6 @@ Axios.interceptors.request.use(
 // http响应拦截器<done>
 Axios.interceptors.response.use(
   response => {
-    console.log('response', response)
     let data = response.data
 
     if (data.code === ERR_OK) {
@@ -60,17 +57,16 @@ Axios.interceptors.response.use(
       console.log('后台原始数据===', data)
       return data
     } else {
-      vm.$createToast({ type: 'error', txt: data.message }).show()
+      toastError(data.message)
       return Promise.reject(data)
     }
   },
   error => {
-    console.log('response.error：', error)
     let message = error.message
     // 超时错误
     if (error.code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
       message = '网络请求超时，请稍后重试'
-      vm.$createToast({ type: 'error', txt: message }).show()
+      toastError(message)
     }
     return Promise.reject(error)
   }

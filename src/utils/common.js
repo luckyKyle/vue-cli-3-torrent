@@ -1,6 +1,9 @@
 /***************************
  * 常规工具方法
  ***************************/
+import Vue from 'vue'
+
+const vm = new Vue()
 
 /**
  * Usage:复制到黏贴版
@@ -15,7 +18,7 @@ export const copyToClipboard = str => {
   el.style.left = '-9999px'
   document.body.appendChild(el)
   const selected =
-        document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
+    document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
   el.select()
   document.execCommand('copy')
   document.body.removeChild(el)
@@ -52,3 +55,7 @@ export const promisify = func => (...args) =>
   new Promise((resolve, reject) =>
     func(...args, (err, result) => (err ? reject(err) : resolve(result)))
   )
+
+export const toastError = txt => {
+  vm.$createToast({ type: 'error', txt }).show()
+}

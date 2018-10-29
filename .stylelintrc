@@ -1,7 +1,16 @@
 {
- "extends": "stylelint-config-standard",
+ "extends": "stylelint-config-recommended",
+  "plugins": [
+    "stylelint-selector-bem-pattern"
+  ],
   "rules": {
+    "block-no-empty": null,
     "at-rule-empty-line-before": null,
-   "declaration-block-trailing-semicolon": "never"
+    "max-empty-lines": 2,
+    "declaration-block-trailing-semicolon": "never",
+    "no-extra-semicolons": true,
+    "indentation": ["tab", {
+      "message": "Please use 2 spaces for indentation. Tabs make The Architect grumpy.",
+    } ]
   }
 }

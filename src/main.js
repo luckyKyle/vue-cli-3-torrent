@@ -6,6 +6,7 @@ import store from '@/store'
 import VueMeta from 'vue-meta'
 import VConsole from 'vconsole'
 import VueLazyLoad from 'vue-lazyload'
+import lodash from 'lodash-es'
 
 import fastclick from 'fastclick'
 import axios from '@/api/axios'
@@ -50,6 +51,7 @@ Vue.use(VueLazyLoad, {
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
+Vue.prototype.$lodash = lodash
 
 fastclick.attach(document.body)
 

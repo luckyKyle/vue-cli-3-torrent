@@ -1,88 +1,72 @@
-/*
- * pxborder.css -https://github.com/JofunLiang/pxborder
- * Version - 1.0.0
- * Licensed under the MIT license - http://opensource.org/licenses/MIT
- * Copyright (c) 2018 jofun Liang
- */
-$border-color = #d7d7d7
-
-/* utils */
-[px-border]
+$color-row-line = #d7d7d7
+.border-top-1px, .border-right-1px, .border-bottom-1px, .border-left-1px
   position relative
-  border-width 0
-  border-color $border-color
-[px-border]:after
-  display block
-  content ''
-  width 100%
-  height 100%
-  border-radius inherit
-  border-color inherit
-  border-style solid
-  border-width 0
-  box-sizing border-box
-  position absolute
-  left 0
-  top 0
-/* setting border-width */
-[px-border=top]:after
-  border-top-width 1px
-[px-border=bottom]:after
-  border-bottom-width 1px
-[px-border=level]:after
-  border-top-width 1px
-  border-bottom-width 1px
-[px-border=left]:after
-  border-left-width 1px
-[px-border=right]:after
-  border-right-width 1px
-[px-border=vertical]:after
-  border-left-width 1px
-  border-right-width 1px
-[px-border=all]:after
-  border-width 1px
-/* media responsed */
-@media (-webkit-min-device-px-ratio: 1.25), (-o-min-device-px-ratio: 125 / 100), (min-moz-device-px-ratio: 1.25), (min-device-px-ratio: 1.25)
-  [px-border]:after
-    width 125%
-    height 125%
-    -webkit-transform scale(0.8, 0.8)
-    transform scale(0.8, 0.8)
-    -webkit-transform-origin left top
-    transform-origin left top
-@media (-webkit-min-device-px-ratio: 1.5), (-o-min-device-px-ratio: 150 / 100), (min-moz-device-px-ratio: 1.5), (min-device-px-ratio: 1.5)
-  [px-border]:after
-    width 150%
-    height 150%
-    -webkit-transform scale(0.66666, 0.66666)
-    transform scale(0.66666, 0.66666)
-@media (-webkit-min-device-px-ratio: 2), (-o-min-device-px-ratio: 200 / 100), (min-moz-device-px-ratio: 2), (min-device-px-ratio: 2)
-  [px-border]:after
-    width 200%
-    height 200%
-    -webkit-transform scale(0.5, 0.5)
-    transform scale(0.5, 0.5)
-@media (-webkit-min-device-px-ratio: 2.5), (-o-min-device-px-ratio: 250 / 100), (min-moz-device-px-ratio: 2.5), (min-device-px-ratio: 2.5)
-  [px-border]:after
-    width 250%
-    height 250%
-    -webkit-transform scale(0.4, 0.4)
-    transform scale(0.4, 0.4)
-@media (-webkit-min-device-px-ratio: 3), (-o-min-device-px-ratio: 300 / 100), (min-moz-device-px-ratio: 3), (min-device-px-ratio: 3)
-  [px-border]:after
-    width 300%
-    height 300%
-    -webkit-transform scale(0.33333, 0.33333)
-    transform scale(0.33333, 0.33333)
-@media (-webkit-min-device-px-ratio: 3.5), (-o-min-device-px-ratio: 350 / 100), (min-moz-device-px-ratio: 3.5), (min-device-px-ratio: 3.5)
-  [px-border]:after
-    width 350%
-    height 350%
-    -webkit-transform scale(0.28571, 0.28571)
-    transform scale(0.28571, 0.28571)
-@media (-webkit-min-device-px-ratio: 4), (-o-min-device-px-ratio: 400 / 100), (min-moz-device-px-ratio: 4), (min-device-px-ratio: 4)
-  [px-border]:after
-    width 400%
-    height 400%
-    -webkit-transform scale(0.25, 0.25)
-    transform scale(0.25, 0.25)
+  &::before, &::after
+    content ''
+    display block
+    position absolute
+    transform-origin 0 0
+.border-top-1px
+  &::before
+    border-top 1px solid $color-row-line
+    left 0
+    top 0
+    width 100%
+    transform-origin 0 top
+.border-right-1px
+  &::after
+    border-right 1px solid $color-col-line
+    top 0
+    right 0
+    height 100%
+    transform-origin right 0
+.border-bottom-1px
+  &::after
+    border-bottom 1px solid $color-row-line
+    left 0
+    bottom 0
+    width 100%
+    transform-origin 0 bottom
+.border-left-1px
+  &::before
+    border-left 1px solid $color-col-line
+    top 0
+    left 0
+    height 100%
+    transform-origin left 0
+.cube-safe-area-pb
+  safe-area-mixin(padding-bottom, bottom, true)
+@media (min-resolution: 2dppx)
+  .border-top-1px
+    &::before
+      width 200%
+      transform scale(0.5)
+  .border-right-1px
+    &::after
+      height 200%
+      transform scale(0.5)
+  .border-bottom-1px
+    &::after
+      width 200%
+      transform scale(0.5)
+  .border-left-1px
+    &::before
+      height 200%
+      transform scale(0.5)
+@media (min-resolution: 3dppx)
+  .border-top-1px
+    &::before
+      width 300%
+      transform scale(0.333)
+  .border-right-1px
+    &::after
+      height 300%
+      transform scale(0.333)
+  .border-bottom-1px
+    &::after
+      width 300%
+      transform scale(0.333)
+  .border-left-1px
+    &::before
+      height 300%
+      transform scale(0.333)

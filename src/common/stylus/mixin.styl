@@ -1,15 +1,16 @@
 // 背景图片
-bg-image($url)
+bg-image($imgName, $width = auto, $height = auto)
+  width $width
+  height $height
   background-repeat no-repeat
-  background-image url('../../common/image/'+$url + '@2x.png')
-  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
-    background-image url('../../common/image/'+$url + '@3x.png')
-
+  background-size contain
+  background-image url('../../common/image/' + $imgName + '@2x.png')
+  @media (min-resolution: 3dppx)
+    background-image url('../../common/image/' + $imgName + '@3x.png')
 // 锁定图片尺寸
 fix-image-size()
   max-width 100%
   max-height 100%
-
 // 多行溢出
 mult_line_ellipsis($line = 2)
   overflow hidden
@@ -17,10 +18,9 @@ mult_line_ellipsis($line = 2)
   display -webkit-box
   -webkit-line-clamp $line
   -webkit-box-orient vertical
-
 // 前缀icon
 prefix-icon($width = 0, $height = 0)
-  content ' '
+  content ''
   position absolute
   left 0
   top 50%
@@ -29,13 +29,11 @@ prefix-icon($width = 0, $height = 0)
   transform translateY(-50%)
   background-repeat no-repeat
   background-size contain
-
 // 不换行
 no-wrap()
   text-overflow ellipsis
   overflow hidden
   white-space nowrap
-
 // 扩展点击区域
 extend-click()
   position relative
@@ -46,8 +44,15 @@ extend-click()
     left -10px
     right -10px
     bottom -10px
-
-//清除浮动
+// 满屏
+fixed-full($zIndex = 1)
+  position fixed
+  z-index $zIndex
+  top 0
+  left 0
+  right 0
+  bottom 0
+// 清除浮动
 clearfix()
   &:before, &:after
     content ''
@@ -55,22 +60,19 @@ clearfix()
   &:after
     clear both
     overflow hidden
-
-//水平垂直居中
-posCenter(){
- position absolute
- top 50%
- left 50%
- transform translate(-50%,-50%)
-}
-posX(){
- position absolute
- left 50%
- transform translateX(-50%)
-}
-
-//垂直居中
-posY($offset = 0, $left = true)
+// 水平垂直居中
+pos-center()
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+// 仅水平居中
+pos-x()
+  position absolute
+  left 50%
+  transform translateX(-50%)
+// 仅垂直居中
+pos-y($offset = 0, $left = true)
   position absolute
   top 50%
   transform translateY(-50%)
@@ -80,60 +82,78 @@ posY($offset = 0, $left = true)
   else
     left auto
     right $offset
-
-// 等腰三角形
-triangle($width, $height, $color, $direction)
-  $width $width/2
-  $color-border-style $height solid $color
-  $transparent-border-style $width solid transparent
-  height 0
-  width 0
-  if $direction==up {
-    border-bottom: $color-border-style
-    border-left: $transparent-border-style
-    border-right: $transparent-border-style
-  }
-  else if $direction==right {
-    border-left: $color-border-style
-    border-top: $transparent-border-style
-    border-bottom: $transparent-border-style
-  }
-  else if $direction==down {
-    border-top: $color-border-style
-    border-left: $transparent-border-style
-    border-right: $transparent-border-style
-  }
-  else if $direction==left
-    border-right: $color-border-style
-    border-top: $transparent-border-style
-    border-bottom: $transparent-border-style
-
-borderY($width,$dir=top,$color=#d7d7d7)
-  position absolute
-  top 50%
-  right 0
-  transform translateY(-50%)  scaleX(0.5)
+// 水平(上下)边框
+border-x($width, $dir = top, $color = #d7d7d7)
   content '\0020'
-  height $height
+  width $width
   height 1px
-  if $dir==top
+  transform scaleY(0.5)
+  if ($dir == top)
     border-top 1px $color solid
   else
     border-bottom 1px $color solid
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
-    transform translateY(-50%)  scaleX(0.33333)
-borderX($height,$dir=right,$color=#d7d7d7)
-    position absolute
-    top 50%
-    right 0
-    transform translateY(-50%)  scaleX(0.5)
-    content '\0020'
-    height $height
-    width 1px
-    overflow hidden
-    if $dir==right
-      border-right 1px $color solid
-    else
-      border-left 1px $color solid
-    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
-      transform translateY(-50%)  scaleX(0.33333)
+    transform scaleY(0.33333)
+// 垂直(左右)边框
+border-y($height, $dir = right, $color = #d7d7d7)
+  content '\0020'
+  height $height
+  width 1px
+  overflow hidden
+  transform scaleX(0.5)
+  if ($dir == right)
+    border-right 1px $color solid
+  else
+    border-left 1px $color solid
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+    transform scaleX(0.33333)
+// 等腰三角形
+triangle($width, $height, $color, $direction = top)
+  width $height
+  height $width
+  if ($direction == up)
+    border-bottom $color
+    border-left transparent
+    border-right transparent
+  else if ($direction == right)
+    border-left $color
+    border-top transparent
+    border-bottom transparent
+  else if ($direction == down)
+    border-top $color
+    border-left transparent
+    border-right transparent
+  else if ($direction == left)
+    border-right $color
+    border-top transparent
+    border-bottom transparent
+// 提交按钮
+submit-btn()
+  bg-image('form-btn')
+  position relative
+  background-color transparent
+  width 100%
+  height 83px
+  font-weight 600
+  padding 0
+  .text
+    pos-center()
+    margin-top -3px
+    font-weight 600
+    text-shadow 0 2px 0 rgba(0, 0, 0, 0.35)
+  &:active
+    transform translateY(5px)
+    &:after
+      border none
+// 边框
+border-name($width = 2px, $color = #d7d7d7, $style = solid, $dir = '')
+  if ($dir == top)
+    border-top $width $style $color
+  else if ($dir == bottom)
+    border-bottom $width $style $color
+  else if ($dir == left)
+    border-left $width $style $color
+  else if ($dir == right)
+    border-right $width $style $color
+  else
+    border $width $style $color
