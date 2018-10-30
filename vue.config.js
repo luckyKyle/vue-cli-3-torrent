@@ -10,6 +10,8 @@ const resolve = (dir) => path.join(__dirname, dir)
 module.exports = {
   // baseUrl: DEV ? '/' : '../dist/',
   // outputDir: 'dist',
+
+  productionSourceMap: false,
   chainWebpack: config => {
     // 修改插件
     const conf = config.toConfig()

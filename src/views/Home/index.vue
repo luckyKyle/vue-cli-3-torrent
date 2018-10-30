@@ -2,14 +2,16 @@
   <div class="container">
     <h1>首页</h1>
     <cube-slide class="slide-wrapper"
+                :data="imgList"
                 :options="options">
       <cube-slide-item v-for="(item, index) in imgList"
                        :key="index"
-                       class="slide-item">
-        <div @click="selelctSlide(index)">
+                       class="slide-item"
+                       @click.native="selelctSlide(index)">
+        <a>
           <img class="img"
                :src="item.url">
-        </div>
+        </a>
       </cube-slide-item>
     </cube-slide>
 
