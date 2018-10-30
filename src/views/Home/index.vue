@@ -53,10 +53,6 @@ export default {
   methods: {
     // 点击按钮
     handleTestClick() {
-      console.log(chunk(['a', 'b', 'c', 'd'], 3))
-      // debounce(() => {
-      //   console.log('按钮按钮')
-      // }, 200)
     },
     // 触发时间选择
     showDatePicker() {
@@ -84,9 +80,8 @@ export default {
     })
   },
   created() {
-    setTimeout(() => {
-      this._fetchData()
-    }, 1500)
+    this._fetchData()
+    console.log(chunk(['a', 'b', 'c', 'd'], 2))
   }
 }
 </script>

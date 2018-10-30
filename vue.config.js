@@ -8,6 +8,8 @@ const PostCompilePlugin = require('webpack-post-compile-plugin')
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
+  // baseUrl: DEV ? '/' : '../dist/',
+  // outputDir: 'dist',
   chainWebpack: config => {
     // 修改插件
     const conf = config.toConfig()

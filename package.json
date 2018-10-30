@@ -20,6 +20,7 @@
     "nprogress": "^0.2.0",
     "qs": "^6.5.2",
     "vue": "^2.5.17",
+    "vue-jsonp": "^0.1.8",
     "vue-lazyload": "^1.2.6",
     "vue-meta": "^1.5.5",
     "vue-router": "^3.0.1",
