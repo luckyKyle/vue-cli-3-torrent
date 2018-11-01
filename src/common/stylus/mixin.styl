@@ -127,26 +127,8 @@ triangle($width, $height, $color, $direction = top)
     border-right $color
     border-top transparent
     border-bottom transparent
-// 提交按钮
-submit-btn()
-  bg-image('form-btn')
-  position relative
-  background-color transparent
-  width 100%
-  height 83px
-  font-weight 600
-  padding 0
-  .text
-    pos-center()
-    margin-top -3px
-    font-weight 600
-    text-shadow 0 2px 0 rgba(0, 0, 0, 0.35)
-  &:active
-    transform translateY(5px)
-    &:after
-      border none
 // 边框
-border-name($width = 2px, $color = #d7d7d7, $style = solid, $dir = '')
+border($width = 2px, $color = #d7d7d7, $style = solid, $dir = '')
   if ($dir == top)
     border-top $width $style $color
   else if ($dir == bottom)

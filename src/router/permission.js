@@ -1,5 +1,5 @@
 import router from './index'
-import * as storage from '@/utils/storage'
+import storage from '@/utils/storage'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 

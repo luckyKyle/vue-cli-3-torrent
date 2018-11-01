@@ -60,6 +60,7 @@
     "stylus-loader": "^3.0.2",
     "vconsole": "^3.2.0",
     "vue-template-compiler": "^2.5.17",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-deep-scope-plugin": "^1.5.3",
     "webpack-parallel-uglify-plugin": "^1.1.0",
     "webpack-post-compile-plugin": "^1.0.0",

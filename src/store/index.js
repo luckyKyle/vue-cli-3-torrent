@@ -5,7 +5,7 @@ import * as getters from './getters'
 import state from './state'
 import mutations from './mutations'
 import createPersistedState from 'vuex-persistedstate'
-import * as storage from '@/utils/storage'
+import storage from '@/utils/storage'
 import createLogger from 'vuex/dist/logger'
 Vue.use(Vuex)
 

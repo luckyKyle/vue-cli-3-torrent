@@ -83,7 +83,7 @@ export default {
   },
   created() {
     this._fetchData()
-    console.log(chunk(['a', 'b', 'c', 'd'], 2))
+    console.log('演示lodash的chunk方法==>', chunk(['a', 'b', 'c', 'd'], 2))
   }
 }
 </script>

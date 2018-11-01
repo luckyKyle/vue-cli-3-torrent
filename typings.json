@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lodash": "registry:dt/lodash#4.14.0+20170324155812",
+    "stylus": "registry:dt/stylus#0.48.1+20161128184045"
+  }
+}
