@@ -8,8 +8,7 @@ const PostCompilePlugin = require('webpack-post-compile-plugin')
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
-  // baseUrl: DEV ? '/' : '../dist/',
-  outputDir: 'dist',
+  outputDir: 'jiufu',
 
   productionSourceMap: false,
   chainWebpack: config => {
@@ -34,7 +33,7 @@ module.exports = {
       .set('@', resolve('src'))
       .set('common', resolve('src/common'))
   },
-  configureWebpack(config) {
+  configureWebpack: config => {
     // 根据Node变量环境返回对应的自定义配置来合并config
     return DEV ? webpackDevConf : webpackProdConf
   },

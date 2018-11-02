@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1>首页</h1>
     <cube-slide class="slide-wrapper"
                 :data="imgList"
-                :options="options">
+                :options="options"
+                v-if="imgList.length">
       <cube-slide-item v-for="(item, index) in imgList"
                        :key="index"
                        class="slide-item"
@@ -14,7 +14,9 @@
         </a>
       </cube-slide-item>
     </cube-slide>
+    <div class="test">
 
+    </div>
     <cube-button @click.native="showDatePicker"
                  class="btn">
       Show DatePicker
@@ -41,23 +43,27 @@ import { chunk } from 'lodash-es'
 export default {
   data() {
     return {
-      imgList: [],
-      options: {
+      imgList: []
+    }
+  },
+  computed: {
+    options() {
+      return {
         click: true,
         listenScroll: true,
         probeType: 3
       }
-    }
-  },
-  computed: {
+    },
     ...mapGetters(['userinfo'])
   },
   methods: {
     // 点击按钮
     handleTestClick() {
+      this.$store.commit('SET_USETINFO', { name: '123' })
     },
     // 触发时间选择
     showDatePicker() {
+      console.log(this.userinfo)
       this.$createDatePicker({
         title: 'Date Picker',
         min: new Date(2008, 7, 8),
@@ -73,6 +79,7 @@ export default {
         const res = await getHome()
         const data = res.data
         this.imgList = data.data.imgList
+        console.log(data.data)
       } catch (err) {
         console.log('获取数据错误', err)
       }

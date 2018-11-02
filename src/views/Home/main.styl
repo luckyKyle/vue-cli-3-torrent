@@ -1,6 +1,5 @@
-
-@import '~common/stylus/variable'
-@import '~common/stylus/mixin'
+@import '~common/stylus/variable.styl'
+@import '~common/stylus/mixin.styl'
 .container
   background #fff
   overflow hidden
@@ -17,3 +16,9 @@
   .btn2
     margin 15px 0
     width 150px
+  .test
+    background red
+    height 50px
+    &::after
+      right-triangle()
+      content ''

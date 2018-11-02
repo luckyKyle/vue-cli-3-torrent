@@ -20,13 +20,10 @@ mult_line_ellipsis($line = 2)
   -webkit-box-orient vertical
 // 前缀icon
 prefix-icon($width = 0, $height = 0)
+  pos-y()
   content ''
-  position absolute
-  left 0
-  top 50%
   height $height
   width $width
-  transform translateY(-50%)
   background-repeat no-repeat
   background-size contain
 // 不换行
@@ -92,50 +89,55 @@ border-x($width, $dir = top, $color = #d7d7d7)
     border-top 1px $color solid
   else
     border-bottom 1px $color solid
-  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+  @media (min-resolution: 3dppx)
     transform scaleY(0.33333)
 // 垂直(左右)边框
 border-y($height, $dir = right, $color = #d7d7d7)
   content '\0020'
   height $height
   width 1px
-  overflow hidden
   transform scaleX(0.5)
   if ($dir == right)
     border-right 1px $color solid
   else
     border-left 1px $color solid
-  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+  @media (min-resolution: 3dppx)
     transform scaleX(0.33333)
 // 等腰三角形
-triangle($width, $height, $color, $direction = top)
-  width $height
-  height $width
-  if ($direction == up)
-    border-bottom $color
-    border-left transparent
-    border-right transparent
+regular-triangle($direction = top, $width = 20px, $color = #000)
+  width 0
+  height 0
+  border-width $width
+  if ($direction == top)
+    border-style dashed dashed solid dashed
+    border-color transparent transparent $color transparent
   else if ($direction == right)
-    border-left $color
-    border-top transparent
-    border-bottom transparent
-  else if ($direction == down)
-    border-top $color
-    border-left transparent
-    border-right transparent
+    border-style dashed dashed dashed solid
+    border-color transparent transparent transparent $color
+  else if ($direction == bottom)
+    border-style solid dashed dashed dashed
+    border-color $color transparent transparent transparent
   else if ($direction == left)
-    border-right $color
-    border-top transparent
-    border-bottom transparent
-// 边框
-border($width = 2px, $color = #d7d7d7, $style = solid, $dir = '')
-  if ($dir == top)
-    border-top $width $style $color
-  else if ($dir == bottom)
-    border-bottom $width $style $color
-  else if ($dir == left)
-    border-left $width $style $color
-  else if ($dir == right)
-    border-right $width $style $color
-  else
-    border $width $style $color
+    border-style dashed dashed dashed solid
+    border-color transparent transparent transparent $color
+// 直角三角形
+right-triangle($direction = bottom, $color = #000, $width = 20px, $opacity = transparent, $border = dashed)
+  width 0
+  height 0
+  border-width $width
+  // 向上
+  if ($direction == top)
+    border-style dashed $border $border dashed
+    border-color $opacity $color $color $opacity
+  // 向右
+  if ($direction == right)
+    border-style $border dashed dashed $border
+    border-color $color $opacity $opacity $color
+  // 向下
+  if ($direction == bottom)
+    border-style dashed dashed $border $border
+    border-color $opacity $opacity $color $color
+  // 向左
+  if ($direction == left)
+    border-style $border $border dashed dashed
+    border-color $color $color $opacity $opacity
