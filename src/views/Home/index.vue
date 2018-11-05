@@ -14,9 +14,6 @@
         </a>
       </cube-slide-item>
     </cube-slide>
-    <div class="test">
-
-    </div>
     <cube-button @click.native="showDatePicker"
                  class="btn">
       Show DatePicker

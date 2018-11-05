@@ -121,23 +121,23 @@ regular-triangle($direction = top, $width = 20px, $color = #000)
     border-style dashed dashed dashed solid
     border-color transparent transparent transparent $color
 // 直角三角形
-right-triangle($direction = bottom, $color = #000, $width = 20px, $opacity = transparent, $border = dashed)
+right-triangle($direction = bottom, $width = 20px, $color = #000)
   width 0
   height 0
   border-width $width
   // 向上
   if ($direction == top)
-    border-style dashed $border $border dashed
-    border-color $opacity $color $color $opacity
+    border-style dashed
+    border-color transparent $color $color transparent
   // 向右
   if ($direction == right)
-    border-style $border dashed dashed $border
-    border-color $color $opacity $opacity $color
+    border-style dashed
+    border-color $color transparent transparent $color
   // 向下
   if ($direction == bottom)
-    border-style dashed dashed $border $border
-    border-color $opacity $opacity $color $color
+    border-style dashed
+    border-color transparent transparent $color $color
   // 向左
   if ($direction == left)
-    border-style $border $border dashed dashed
-    border-color $color $color $opacity $opacity
+    border-style dashed
+    border-color $color $color transparent transparent
