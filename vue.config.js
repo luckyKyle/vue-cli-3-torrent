@@ -7,6 +7,17 @@ const PostCompilePlugin = require('webpack-post-compile-plugin')
 
 const resolve = (dir) => path.join(__dirname, dir)
 
+let proxy = {}
+const prefixs = ['banner']
+const target = 'http://localhost:3000'
+const changeOrigin = true
+prefixs.forEach(key => {
+  proxy[key] = {
+    target,
+    changeOrigin
+  }
+})
+
 module.exports = {
   outputDir: 'jiufu',
 
@@ -55,7 +66,8 @@ module.exports = {
     port: 8088,
     https: false,
     hotOnly: false,
-    proxy: null, // 设置代理
+    proxy: proxy, // 设置代理
+    // proxy:'http://localhost:3000',
     before: app => {
       // `app` 是一个 express 实例
     }

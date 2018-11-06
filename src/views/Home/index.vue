@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <cube-slide class="slide-wrapper"
-                :data="imgList"
+                :data="banners"
                 :options="options"
-                v-if="imgList.length">
-      <cube-slide-item v-for="(item, index) in imgList"
+                v-if="banners.length">
+      <cube-slide-item v-for="(item, index) in banners"
                        :key="index"
                        class="slide-item"
                        @click.native="selelctSlide(index)">
         <a>
           <img class="img"
-               :src="item.url">
+               :src="item.imageUrl">
         </a>
       </cube-slide-item>
     </cube-slide>
@@ -29,18 +29,19 @@
 
     <!-- skeleton component -->
     <skeleton slot="skeleton"
-              v-if="!imgList.length"></skeleton>
+              v-if="!banners.length"></skeleton>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getHome } from '@/api'
+import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
 import { chunk } from 'lodash-es'
+
 export default {
   data() {
     return {
-      imgList: []
+      banners: []
     }
   },
   computed: {
@@ -70,13 +71,22 @@ export default {
         onCancel: this.cancelHandle // 取消回调
       }).show()
     },
+    selelctSlide(index) {
+      console.log('选择了', index)
+    },
+    selectHandle() {
+      console.log('确定了')
+    },
+    cancelHandle() {
+      console.log('取消了')
+    },
     // 获取数据
     async _fetchData() {
       try {
-        const res = await getHome()
+        const res = await api.getBanner()
         const data = res.data
-        this.imgList = data.data.imgList
-        console.log(data.data)
+        this.banners = data.banners
+        console.log(this.banners)
       } catch (err) {
         console.log('获取数据错误', err)
       }
