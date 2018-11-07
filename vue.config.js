@@ -12,10 +12,7 @@ const prefixs = ['banner']
 const target = 'http://localhost:3000'
 const changeOrigin = true
 prefixs.forEach(key => {
-  proxy[key] = {
-    target,
-    changeOrigin
-  }
+  proxy[key] = { target, changeOrigin }
 })
 
 module.exports = {
@@ -66,7 +63,7 @@ module.exports = {
     port: 8088,
     https: false,
     hotOnly: false,
-    proxy: proxy, // 设置代理
+    proxy, // 设置代理
     // proxy:'http://localhost:3000',
     before: app => {
       // `app` 是一个 express 实例

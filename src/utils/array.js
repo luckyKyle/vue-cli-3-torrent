@@ -50,3 +50,19 @@ export const getRadomNum = (min, max, length) => {
   }
   return arr
 }
+
+// 升降序切换
+export const compare = (key, flag) => {
+  return (a, b) => flag ? (b[key] - a[key]) : (a[key] - b[key])
+}
+/**
+ * 数组内根据对象大小升降序切换
+ * @param arr 数组
+ * @param key 根据某个key来排序
+ * @param flag 正反序 ，默认降序
+ * @returns  sortObj([{index:1},{index:5},{index:4},{index:3}],'index',true)
+ */
+export const sortObj = (arr, key, flag = true) => {
+  if (!arr.length) return
+  return arr.sort(compare(key, flag))
+}

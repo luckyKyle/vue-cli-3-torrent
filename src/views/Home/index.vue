@@ -36,6 +36,7 @@
 <script type="text/ecmascript-6">
 import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
+import { sortObj } from '@/utils/array'
 import { chunk } from 'lodash-es'
 
 export default {
@@ -87,6 +88,9 @@ export default {
         const data = res.data
         this.banners = data.banners
         console.log(this.banners)
+        let arr = [{ index: '0' }, { index: '4' }, { index: '3' }, { index: '2' }, { index: '1' }]
+        let t = sortObj(arr, 'index', false)
+        console.log(t)
       } catch (err) {
         console.log('获取数据错误', err)
       }
