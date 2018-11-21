@@ -9,6 +9,7 @@
     "max-empty-lines": 2,
     "declaration-block-trailing-semicolon": "never",
     "no-extra-semicolons": true,
-    "indentation": ["tab", { "except": ["value"] }]
+    "indentation": ["tab", { "except": ["value"] }],
+    "no-empty-source": null
   }
 }
