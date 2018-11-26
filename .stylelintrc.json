@@ -1,8 +1,6 @@
 {
- "extends": "stylelint-config-recommended",
-  "plugins": [
-    "stylelint-selector-bem-pattern"
-  ],
+  "extends": "stylelint-config-recommended",
+  "plugins": ["stylelint-selector-bem-pattern"],
   "rules": {
     "block-no-empty": null,
     "at-rule-empty-line-before": null,

@@ -31,7 +31,7 @@
 
 
 ## UI库
-+ **cube-ui**  
++ **cube-ui**
 
 
 ## Webpack 优化
@@ -66,11 +66,11 @@
 │   ├── webpack.base.conf.js		# 公共打包执行任务
 │   ├── webpack.dev.conf.js		    # 开发环境打包执行任务
 │   └── webpack.prod.conf.js		# 生产环境打包执行任务
-├── mock							
+├── mock
 │   ├── data						# mock接口
 │   │   └── userinfo.js
 │   └── index.js					# mock配置文件
-├── public							
+├── public
 │   ├── favicon.ico
 │   └── index.html					# 入口页面
 ├── src
@@ -79,7 +79,7 @@
 │   │   ├── axios.js				# axios请求拦截封装
 │   │   ├── config.js				# axios请求参数配置
 │   │   └── index.js				# 接口请求封装
-│   ├── common						
+│   ├── common
 │   │   ├── image
 │   │   │   └── default.png
 │   │   └── stylus
@@ -89,16 +89,16 @@
 │   │       ├── mixin.styl			# 常用mixin<长期维护>
 │   │       ├── reset.styl			# 接口请求封装
 │   │       └── variable.styl		# 全局定义变量
-│   ├── components				
+│   ├── components
 │   │   └── Skeleton.vue			# 骨架屏组件
-│   ├── mock						
+│   ├── mock
 │   │   ├── data					# mock接口
 │   │   │   └── users.js
 │   │   ├── index.js				# mock出口方法
 │   │   └── mock.js				# mock拦截处理
-│   ├── routers						
+│   ├── routers
 │   │   └── index.js				# vue-router配置
-│   ├── store						
+│   ├── store
 │   │   ├── modules				# 功能模块
 │   │   ├── actions.js				# 根级别的action
 │   │   ├── getters.js				# 根级别的getters
@@ -186,7 +186,7 @@ window.onresize = () => { setRem() }
 > 具体语法可参考[Stylus cheatsheet](https://devhints.io/stylus)
 
 
-## VConsole 
+## VConsole
 
 > 真机调试，在`main.js`里已配置。
 
@@ -200,7 +200,7 @@ if (process.env.NODE_ENV !== 'production') {
 ![vconsole](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/6.jpg?raw=true)
 
 
-## Lodash  
+## Lodash
 > 在`main.js`里注入到Vue的原型上，通过`this._`来调用。
 
 ```js
@@ -214,7 +214,7 @@ this._.chunk(['a', 'b', 'c', 'd'], 2);
 [lodash文档](https://www.lodashjs.com/docs/4.17.5.html)。
 
 
-## NProgress 
+## NProgress
 > 在`main.js`里引入样式文件
 
 ```js
@@ -228,13 +228,13 @@ import 'nprogress/nprogress.css'
 router.beforeEach((to, from, next) => {
   let userinfo = storage.get('userinfo')
   // 判断是否需要登录权限
-  if (to.matched.some(res => res.meta.requireAuth)) { 
+  if (to.matched.some(res => res.meta.requireAuth)) {
     // 判断是否登录
-    if (userinfo) { 
+    if (userinfo) {
       next()
-    } 
+    }
     // 没登录则跳转到登录界面
-    else { 
+    else {
       NProgress.start()
       next({
         path: '/Login',
@@ -251,7 +251,7 @@ router.afterEach(transition => {
 })
 ```
 
-## axios  
+## axios
 > axios除了做接口请求，主要还做了拦截处理，利于接口数据异常统一管理，相关代码都在`src/api`文件夹内。
 
 请求拦截的逻辑放在`src/api/axios.js`里。
@@ -262,7 +262,7 @@ Axios.interceptors.request.use(
   config => {
     //...
     // 以下的判断处理可根据具体需求场景做一些统一操作
-    const token = cookie.get('token')  
+    const token = cookie.get('token')
     // 判断是否存在token，即判断用户是否登录
     if (token) {
       cookie.set('token', token, 1 / 12) // 用户每次操作，都将cookie设置成2小时
@@ -271,7 +271,7 @@ Axios.interceptors.request.use(
     return config
   },
  error => {
-    // do something 
+    // do something
   }
 )
 ```
@@ -308,7 +308,7 @@ export default {
 
 ```
 
-## mock.js 
+## mock.js
 > 很多时候我们前端来定接口数据结构，`easy-mock`等在线工具也好用，但是经常出现不稳定，网址频繁挂掉。这里的moack主要引入[axios-mock-adapter](https://www.npmjs.com/package/axios-mock-adapter)，一样配合axios来做了拦截处理。mock的语法请参考官方文档[Mock](https://github.com/nuysoft/Mock/wiki)。
 
 所有的mock数据接口每条单独一份放在`src/mock/data`文件夹下，数据对象使用`common.js`语法暴露出来。
@@ -397,7 +397,7 @@ export default {
 ![控制台console](https://github.com/kpengWang/Blog-images-storage/blob/master/2018-08-17/4.png?raw=true)
 
 
-## husky + lint-staged 
+## husky + lint-staged
 
 > 主要是在把 Lint 挪到本地，并且每次提交只检查本次提交所修改的文件，使用 `git commit -a`，或者先 `git add `然后 `git commit` 的时候，你的修改代码都会经过待提交区。
 
@@ -407,7 +407,7 @@ export default {
     "script":{
         // ...
         "precommit": "lint-staged"
-    }   
+    }
     "lint-staged": {
     "src/**/*.{js,ts}": [
       "standard --write",
@@ -427,11 +427,11 @@ export default {
 ```js
 //main.js
 
-// do something 
+// do something
 Vue.use(VueLazyLoad, {
   loading: require('./common/image/default.png')
 })
-// do something 
+// do something
 ```
 
 ``` html
@@ -450,11 +450,11 @@ Vue.use(VueLazyLoad, {
 - 具体文档参考[@xunlei/vue-lazy-component](https://www.npmjs.com/package/@xunlei/vue-lazy-component)。
 - [在线Demo效果](https://xunleif2e.github.io/vue-lazy-component/demo/dist/index.html#/)
 
-## vuex 
+## vuex
 > 推荐直接阅读[vuex官方文档](https://vuex.vuejs.org/zh/guide/)。项目结构一样是使用的官方推荐的。
 
 
-## vuex-persistedstate 
+## vuex-persistedstate
 
 >  数据持久化解决方案,主要使用场景是，页面刷新时当前页面的状态仍然可以保持。
 
@@ -535,7 +535,7 @@ Vue.use(Toast)
 + **webpack.prod.conf.js**  走生产环境的配置文件
 + **config.js**           配置参数
 
-## happypack 
+## happypack
 > 通过多进程模型，来加速代码构建，代码在`webpack.prod.conf.js`文件中，主要使用了Happypack的`ThreadPool`方法，HappyThreadPool(“进程池”) 对象来管理生成的子进程对象。利用缓存来使得rebuild 更快。
 
 
@@ -550,7 +550,7 @@ const OS = require('os')
 const HappyPack = require('happypack')
 const happyThreadPool = HappyPack.ThreadPool({ size: OS.cpus().length })
 
-  { 
+  {
   // do something...
       plugins: [
         new HappyPack({
@@ -570,7 +570,7 @@ const happyThreadPool = HappyPack.ThreadPool({ size: OS.cpus().length })
 // webpack.prod.conf.js
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
-  { 
+  {
   // do something...
       plugins: [
         new ParallelUglifyPlugin({
@@ -585,4 +585,4 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
   }
 ```
 ## webpack-deep-scope-plugin
-> 
+>

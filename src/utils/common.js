@@ -18,7 +18,9 @@ export const copyToClipboard = str => {
   el.style.left = '-9999px'
   document.body.appendChild(el)
   const selected =
-    document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
+    document.getSelection().rangeCount > 0
+      ? document.getSelection().getRangeAt(0)
+      : false
   el.select()
   document.execCommand('copy')
   document.body.removeChild(el)
@@ -34,15 +36,15 @@ export const copyToClipboard = str => {
  * @param {延时时长} ms
  * Example:  window.addEventListener( 'resize', debounce(() => { console.log(window.innerWidth) console.log(window.innerHeight) }, 250) )
  */
-export const debounce = (fn, delay = 0) => {
-  let timer
-  return function (...args) {
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(() => fn.apply(this, args), delay)
-  }
-}
+// export const debounce = (fn, delay = 0) => {
+// let timer
+// return function (...args) {
+//   if (timer) {
+//     clearTimeout(timer)
+//   }
+//   timer = setTimeout(() => fn.apply(this, args), delay)
+// }
+// }
 
 /**
  * Usage: 将指定函数转换成promise函数式

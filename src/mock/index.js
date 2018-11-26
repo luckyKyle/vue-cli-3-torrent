@@ -20,7 +20,9 @@ class CreateInterface {
   init() {
     const { interfaces, mocker, SUCCESS_STATUS } = this
     interfaces.forEach(filename => {
-      mocker.onGet(filename).reply((config) => [SUCCESS_STATUS, Mock.mock(require(`./data/${filename}`))])
+      mocker
+        .onGet(filename)
+        .reply(() => [SUCCESS_STATUS, Mock.mock(require(`./data/${filename}`))])
     })
   }
 }

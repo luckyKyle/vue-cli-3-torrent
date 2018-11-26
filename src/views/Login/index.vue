@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="tip-text"> 未授权，跳到登陆</h1>
+    <h1 class="tip-text"> {{msg}}</h1>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 export default {
   data() {
     return {
+      msg: '未授权，跳到登陆'
     }
   }
 }

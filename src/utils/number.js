@@ -57,7 +57,9 @@ export function plus(a, b) {
  * @todo 此处精度计算尽量在6位以内，超6位请慎用。
  */
 export function minus(a, b) {
-  return getCelNum(a).minus(getCelNum(b)).toNumber()
+  return getCelNum(a)
+    .minus(getCelNum(b))
+    .toNumber()
 }
 
 /**
@@ -187,7 +189,7 @@ export function formatNum(number, decimals = 2, roundType = '') {
  * @todo 若需要对小数点后进行千分位划分，请自行扩展，此处主要针对常用两位小数计量。
  */
 export function formatMoney(number, decimals = 2, roundType = '') {
-  const num = (`${number}`).replace(/[^0-9+-Ee.]|,/g, '')
+  const num = `${number}`.replace(/[^0-9+-Ee.]|,/g, '')
 
   const n = formatNum(num, decimals, roundType)
 
@@ -218,7 +220,7 @@ export function formatMoney(number, decimals = 2, roundType = '') {
  *
  */
 export function formatMaxNum(number, decimals = 2, roundType = '') {
-  const num = (`${number}`).replace(/[^0-9+-Ee.]|,/g, '')
+  const num = `${number}`.replace(/[^0-9+-Ee.]|,/g, '')
 
   const n = formatNum(num, decimals, roundType)
 

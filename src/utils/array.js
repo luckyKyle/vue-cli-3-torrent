@@ -16,8 +16,9 @@ export const getProperties = (arr, prop) => arr.map(item => item[prop])
  * @param  arr 数组(Array)  ['aaa','bbbb','cc']
  * @returns 转换为大写['AAA','BBBB','CC']
  */
-export const arrToUpper = (arr) => {
-  if (!Array.isArray(arr) || !arr.every(item => typeof item === 'string')) return
+export const arrToUpper = arr => {
+  if (!Array.isArray(arr) || !arr.every(item => typeof item === 'string'))
+    return
   return arr.map(item => item.toUpperCase())
 }
 
@@ -28,7 +29,7 @@ export const arrToUpper = (arr) => {
  * @returns 转换为大写['11.00%','123.00%','434.00%']
  */
 export const arrToFloat = (arr, keepCount = 2) => {
-  if (!Array.isArray(arr) || !arr.every((item) => !isNaN(item))) return
+  if (!Array.isArray(arr) || !arr.every(item => !isNaN(item))) return
   return arr.map(item => item.toFixed(keepCount) + '%')
 }
 
@@ -53,7 +54,7 @@ export const getRadomNum = (min, max, length) => {
 
 // 升降序切换
 export const compare = (key, flag) => {
-  return (a, b) => flag ? (b[key] - a[key]) : (a[key] - b[key])
+  return (a, b) => (flag ? b[key] - a[key] : a[key] - b[key])
 }
 /**
  * 数组内根据对象大小升降序切换

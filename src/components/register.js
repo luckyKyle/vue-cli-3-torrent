@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 // 首字母大写 a--> A
-function capitalizeFirstLetter (string) {
+function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 

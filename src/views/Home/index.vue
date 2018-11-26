@@ -10,7 +10,7 @@
                        @click.native="selelctSlide(index)">
         <a>
           <img class="img"
-               :src="item.imageUrl">
+               :src="item.picUrl">
         </a>
       </cube-slide-item>
     </cube-slide>
@@ -70,7 +70,23 @@ export default {
       }).show()
     },
     selelctSlide(index) {
-      console.log('选择了', index)
+      let str = ''
+      index = parseInt(index)
+      switch (index) {
+        case 1:
+          str = 1
+          break
+        case 2:
+          str = 2
+          break
+        case 3:
+          str = 3
+          break
+        case 0:
+          str = 0
+          break
+      }
+      console.log('选择了', index, str)
     },
     selectHandle() {
       console.log('确定了')

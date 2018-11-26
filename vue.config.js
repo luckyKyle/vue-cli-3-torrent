@@ -5,7 +5,7 @@ const webpackProdConf = require('./build/webpack.prod.conf')
 const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 const PostCompilePlugin = require('webpack-post-compile-plugin')
 
-const resolve = (dir) => path.join(__dirname, dir)
+const resolve = dir => path.join(__dirname, dir)
 
 let proxy = {}
 const prefixs = ['banner']
@@ -16,26 +16,23 @@ prefixs.forEach(key => {
 })
 
 module.exports = {
-  outputDir: 'jiufu',
-
+  outputDir: 'dist',
   productionSourceMap: false,
   chainWebpack: config => {
     // 修改插件
     const conf = config.toConfig()
     // 自定义cube-ui样式
-    config
-      .plugin('post-compile')
-      .use(PostCompilePlugin, [{
+    config.plugin('post-compile').use(PostCompilePlugin, [
+      {
         config: {
           module: {
             rules: [...conf.module.rules]
           }
         }
-      }])
+      }
+    ])
 
-    config
-      .plugin('transform-modules')
-      .use(TransformModulesPlugin)
+    config.plugin('transform-modules').use(TransformModulesPlugin)
 
     config.resolve.alias
       .set('@', resolve('src'))

@@ -18,7 +18,8 @@ export const getRadomString = (len = 6, length) => {
     pwd += chars.charAt(Math.floor(Math.random() * chars.length))
   }
 
-  if (length) { // 如果带二参，返回为数组
+  if (length) {
+    // 如果带二参，返回为数组
     let arr = []
     for (let j = 0; j < length; j++) {
       arr.push(getRadomString(len))

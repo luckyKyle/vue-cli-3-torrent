@@ -33,7 +33,7 @@ Axios.interceptors.request.use(
       if (config.params) {
         config.params['_'] = +new Date()
       } else {
-        config.params = { '_': +new Date() }
+        config.params = { _: +new Date() }
       }
     }
     return config
@@ -54,7 +54,6 @@ Axios.interceptors.response.use(
       if (typeof data === 'string' && data !== '') {
         data = JSON.parse(data)
       }
-      console.log('后台原始数据===', data)
       return data
     } else {
       toastError(data.message)

@@ -29,7 +29,10 @@ class UA {
   }
 
   isIphoneX() {
-    return (this.os.name === 'iOS' && (window.screen.height === 812 && window.screen.width === 375))
+    return (
+      this.os.name === 'iOS' &&
+      (window.screen.height === 812 && window.screen.width === 375)
+    )
   }
 
   isAndroid() {

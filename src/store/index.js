@@ -18,14 +18,16 @@ export default new Vuex.Store({
   mutations,
   strict: debug,
   // 状态持久化
-  plugins: debug ? [
-    createLogger(),
-    createPersistedState({
-      storage: {
-        getItem: key => storage.get(key),
-        setItem: (key, value) => storage.set(key, value),
-        removeItem: key => storage.remove(key)
-      }
-    })
-  ] : []
+  plugins: debug
+    ? [
+        createLogger(),
+        createPersistedState({
+          storage: {
+            getItem: key => storage.get(key),
+            setItem: (key, value) => storage.set(key, value),
+            removeItem: key => storage.remove(key)
+          }
+        })
+      ]
+    : []
 })

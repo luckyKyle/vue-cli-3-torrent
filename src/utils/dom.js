@@ -8,7 +8,10 @@
  * @return 布尔值
  * Example:bottomVisible() -> true
  */
-export const bottomVisible = () => document.documentElement.clientHeight + window.scrollY >= document.documentElement.scrollHeight || document.documentElement.clientHeight
+export const bottomVisible = () =>
+  document.documentElement.clientHeight + window.scrollY >=
+    document.documentElement.scrollHeight ||
+  document.documentElement.clientHeight
 
 /**
  * Usage: 返回当前页的滚动位置。
@@ -17,7 +20,10 @@ export const bottomVisible = () => document.documentElement.clientHeight + windo
  * @return 布尔值
  * Example:getScrollPosition() -> {x: 0, y: 200}
  */
-export const getScrollPosition = (el = window) => ({ x: (el.pageXOffset !== undefined) ? el.pageXOffset : el.scrollLeft, y: (el.pageYOffset !== undefined) ? el.pageYOffset : el.scrollTop })
+export const getScrollPosition = (el = window) => ({
+  x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+  y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+})
 
 /**
  * Usage: 平滑滚动到页面顶部。

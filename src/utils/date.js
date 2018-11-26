@@ -7,7 +7,8 @@
  * @param {传入日期对象} str
  * Example: getColonTimeFromDate(new Date()) -> "18:04:00"
  */
-export const getColonTimeFromDate = (date = new Date()) => date.toTimeString().slice(0, 8)
+export const getColonTimeFromDate = (date = new Date()) =>
+  date.toTimeString().slice(0, 8)
 
 /**
  *  返回两个日期之间的差异 (以天为值)。
@@ -15,14 +16,15 @@ export const getColonTimeFromDate = (date = new Date()) => date.toTimeString().s
  * @param {传入日期对象} obj
  * Example: getDaysDiffBetweenDates('2018-05-05', '2018-05-14') -> 9
  */
-export const getDaysDiffBetweenDates = (dateInitial, dateFinal) => (new Date(dateFinal) - new Date(dateInitial)) / (1000 * 3600 * 24)
+export const getDaysDiffBetweenDates = (dateInitial, dateFinal) =>
+  (new Date(dateFinal) - new Date(dateInitial)) / (1000 * 3600 * 24)
 
 /**
  * 十位补零
  * @param num (Number)
  * @returns padTime(0) -> '00'
  */
-export const padTime = (num) => num < 10 ? '0' + num : num
+export const padTime = num => (num < 10 ? '0' + num : num)
 
 /**
  *  将时间戳转换为日期
@@ -45,10 +47,10 @@ export const timestampToTime = (timestamp, needTime = false, format = 1) => {
   let s = padTime(date.getSeconds())
 
   switch (format) {
-  case 1:
-    return needTime ? `${Y}-${M}-${D} ${h}:${m}:${s}` : `${Y}-${M}-${D}`
-  case 2:
-    return needTime ? `${D}/${M}/${Y} ${h}:${m}:${s}` : `${D}/${M}/${Y}`
+    case 1:
+      return needTime ? `${Y}-${M}-${D} ${h}:${m}:${s}` : `${Y}-${M}-${D}`
+    case 2:
+      return needTime ? `${D}/${M}/${Y} ${h}:${m}:${s}` : `${D}/${M}/${Y}`
   }
 }
 
@@ -81,8 +83,8 @@ export const dateToWeek = dateString => {
  * Example: compareDate('2007-2-2 7:30', '2007-1-31 8:30') -> true
  */
 export const compareDate = (d1, d2) => {
-  d1 = new Date(d1.replace(/-/g, '\'/'))
-  d2 = new Date(d2.replace(/-/g, '\'/'))
+  d1 = new Date(d1.replace(/-/g, "'/"))
+  d2 = new Date(d2.replace(/-/g, "'/"))
   return d1 > d2
 }
 
@@ -94,7 +96,13 @@ export const compareDate = (d1, d2) => {
 export const getToday = () => {
   let day = new Date()
   day.setTime(day.getTime())
-  return day.getFullYear() + '-' + padTime((day.getMonth() + 1)) + '-' + padTime(day.getDate())
+  return (
+    day.getFullYear() +
+    '-' +
+    padTime(day.getMonth() + 1) +
+    '-' +
+    padTime(day.getDate())
+  )
 }
 
 /**
@@ -107,7 +115,13 @@ export const getPreWeekDay = (pre = 7) => {
   let now = new Date()
   let oneWeekTime = pre * 24 * 60 * 60 * 1000
   let lastWeekDay = new Date(now - oneWeekTime)
-  return lastWeekDay.getFullYear() + '-' + padTime((lastWeekDay.getMonth() + 1)) + '-' + padTime(lastWeekDay.getDate())
+  return (
+    lastWeekDay.getFullYear() +
+    '-' +
+    padTime(lastWeekDay.getMonth() + 1) +
+    '-' +
+    padTime(lastWeekDay.getDate())
+  )
 }
 
 /**
@@ -124,7 +138,7 @@ export const getBetweenDateScope = (start, end) => {
   let arr = []
 
   if (start > end) throw Error('1参日期晚于2参日期')
-  for (let i = start; i <= end;) {
+  for (let i = start; i <= end; ) {
     arr.push(timestampToTime(i))
     i += oneDay
   }
@@ -143,7 +157,7 @@ export const getDateRange = (count = 2, start = getToday()) => {
   let targetDay = new Date()
   let oneDay = 24 * 60 * 60 * 1000
   today.setTime(today.getTime())
-  targetDay.setTime(targetDay.getTime() - (oneDay * (count - 1)))
+  targetDay.setTime(targetDay.getTime() - oneDay * (count - 1))
   today = timestampToTime(today)
   targetDay = timestampToTime(targetDay)
   return { today, targetDay }
