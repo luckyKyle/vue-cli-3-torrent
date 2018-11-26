@@ -23,8 +23,7 @@
                  :inline="true"
                  :outline="true"
                  @click="handleTestClick"
-                 class="btn2">
-      Button
+                 class="btn2">Button
     </cube-button>
 
     <!-- skeleton component -->
@@ -36,8 +35,6 @@
 <script type="text/ecmascript-6">
 import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
-import { sortObj } from '@/utils/array'
-import { chunk } from 'lodash-es'
 
 export default {
   data() {
@@ -87,12 +84,9 @@ export default {
         const res = await api.getBanner()
         const data = res.data
         this.banners = data.banners
-        console.log(this.banners)
-        let arr = [{ index: '0' }, { index: '4' }, { index: '3' }, { index: '2' }, { index: '1' }]
-        let t = sortObj(arr, 'index', false)
-        console.log(t)
+        console.log('banner列表==', this.banners)
       } catch (err) {
-        console.log('获取数据错误', err)
+        console.error('获取数据错误', err)
       }
     },
     ...mapMutations({
@@ -101,7 +95,6 @@ export default {
   },
   created() {
     this._fetchData()
-    console.log('演示lodash的chunk方法==>', chunk(['a', 'b', 'c', 'd'], 2))
   }
 }
 </script>

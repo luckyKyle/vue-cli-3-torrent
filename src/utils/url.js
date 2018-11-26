@@ -34,14 +34,14 @@ export const redirect = (url, asLink = true) => asLink ? (window.location.href =
  * Usage:  将一个对象转换为url的参数拼接
  */
 export const objParseQuery = (param, key, encode) => {
-  if (param === null) return ''
+  if (param == null) return ''
   let paramStr = ''
   let t = typeof (param)
   if (t === 'string' || t === 'number' || t === 'boolean') {
     paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param)
   } else {
-    for (let i in param) {
-      let k = key === null ? i : key + (param instanceof Array ? `[${i}]` : `.${i}`)
+    for (var i in param) {
+      let k = key == null ? i : key + (param instanceof Array ? `[${i}]` : `${i}`)
       paramStr += objParseQuery(param[i], k, encode)
     }
   }

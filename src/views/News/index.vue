@@ -42,7 +42,7 @@ export default {
         const data = res.data
         this.newsList = data.list
       } catch (err) {
-        console.log('获取数据错误2', err)
+        console.error('获取数据错误 ', err)
       }
     }
   },

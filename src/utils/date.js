@@ -53,7 +53,7 @@ export const timestampToTime = (timestamp, needTime = false, format = 1) => {
 }
 
 /**
- *  将为日期转换时间戳
+ *  日期转换时间戳
  */
 export const timeTotimestamp = date => Date.parse(date)
 
