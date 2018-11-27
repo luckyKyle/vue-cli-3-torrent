@@ -50,14 +50,14 @@ module.exports = merge(base, {
     }),
     new WebpackDeepScopeAnalysisPlugin(),
 
-    // // 生成的映射关系文件
-    // new webpack.DllPlugin({
-    //   path: path.join(__dirname, '../dist/js', '[name]-manifest.json'),
-    //   name: '[name]_library',
-    //   context: __dirname
-    // }),
+    // 生成的映射关系文件
+    new webpack.DllPlugin({
+      path: path.join(__dirname, '../dist/js', '[name]-manifest.json'),
+      name: '[name]_library',
+      context: __dirname
+    }),
 
     // 文件结构可视化，找出导致体积过大的原因
-    // new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin()
   ]
 })

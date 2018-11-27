@@ -38,6 +38,7 @@
 + **Happypack**  => *多进程打包*
 + **webpack-parallel-unglify-plugin** => *利用缓存快速压缩*
 + **webpack-deep-scope-plugin** => *提高webpack tree-shaking的效率*
++ **webpack-bundle-analyzer** =>  *文件结构可视化，找出导致体积过大的原因*
 + ...
 
 
@@ -54,13 +55,14 @@
 
 
 ```
-├── package.json					# npm包管理文件
-├── .postcssrc.js					# postcss配置文件
-├── .eslintrc.js					# eslint配置文件
-├── .editorconfig					# editorconfig配置文件
-├── lint-staged.config.js			# lint-staged配置文件
-├── babel.config.js				# babel配置文件
-│── main.js                     # 项目入口文件
+├── package.json					# npm包管理
+├── .postcssrc.js					# postcss配置
+├── .eslintrc.js					# eslint配置
+├── .prettierrc						# prettier格式化规则配置
+├── .stylelintrc.json				# stylelint规则配置
+├── .editorconfig					# editorconfig配置
+├── babel.config.js				    # babel配置文件
+│── main.js                         # 项目入口文件
 ├── build		 					# webpack配置
 │   ├── config.js					# 参数配置文件
 │   ├── webpack.base.conf.js		# 公共打包执行任务
@@ -74,32 +76,37 @@
 │   ├── favicon.ico
 │   └── index.html					# 入口页面
 ├── src
-│   ├── App.vue					# 入口组件
-│   ├── api						# 接口请求处理
+│   ├── App.vue					    # 入口组件
+│   ├── api						    # 接口请求处理
 │   │   ├── axios.js				# axios请求拦截封装
 │   │   ├── config.js				# axios请求参数配置
 │   │   └── index.js				# 接口请求封装
 │   ├── common
 │   │   ├── image
-│   │   │   └── default.png
+│   │   │   └── default.png			# 懒加载替换图片
 │   │   └── stylus
-│   │       ├── base.styl			# 公共全局样式
-│   │       ├── border.styl			# 移动端1像素封装
+│   │   	├── common
+│   │           └── base.styl		# 公共全局样式
+│   │           └── border.styl		# 移动端1像素封装
+│   │           └── iconfont.styl   # 字体icon的class
+│   │           └── reset.styl		# 重置浏览器默认样式
 │   │       ├── index.styl			# 入口文件
 │   │       ├── mixin.styl			# 常用mixin<长期维护>
-│   │       ├── reset.styl			# 接口请求封装
+│   │       ├── theme.styl			# cube-ui的主题覆盖
 │   │       └── variable.styl		# 全局定义变量
 │   ├── components
 │   │   └── Skeleton.vue			# 骨架屏组件
+│   │   └── register.js 		    # 自动注册组件脚本
 │   ├── mock
 │   │   ├── data					# mock接口
 │   │   │   └── users.js
 │   │   ├── index.js				# mock出口方法
-│   │   └── mock.js				# mock拦截处理
 │   ├── routers
-│   │   └── index.js				# vue-router配置
+│   │   └── index.js				# 路由入口
+│   │   └── permission.js			# 路由权限配置文件
+│   │   └── routes.js				# 路由配置表
 │   ├── store
-│   │   ├── modules				# 功能模块
+│   │   ├── modules			     	# 功能模块
 │   │   ├── actions.js				# 根级别的action
 │   │   ├── getters.js				# 根级别的getters
 │   │   ├── index.js				# store入口
@@ -119,15 +126,15 @@
 │   │   └── url.js
 │   └── views						# 页面组件
 │       ├── Home
-│       │   └── index.vue
+│       │   └── Home.vue
 │       │   └── main.styl
 │       ├── Login
-│       │   └── index.vue
+│       │   └── Login.vue
 │       │   └── main.styl
 │       ├── My
-│       │   └── index.vue
+│       │   └── My.vue
 │       │   └── main.styl
-└── vue.config.js				    #vue全局配置文件
+└── vue.config.js				    #vue全局配置
 ```
 
 ---
@@ -142,10 +149,6 @@
 ## PostCss
 
 > 这里是使用了`postcss-pxtorem`插件，开发时直接按照实际 效果图的px单位就行了
-
-```
-
-```
 
 `main.js`里引入'rem.js'
 
@@ -404,17 +407,27 @@ export default {
 主要配置在`package.js`配置文件里.
 ```js
 {
-    "script":{
-        // ...
-        "precommit": "lint-staged"
-    }
-    "lint-staged": {
-    "src/**/*.{js,ts}": [
-      "standard --write",
-      "eslint --fix",
+  // ...
+   "lint-staged": {
+    "**/**.{js,json,pcss,md,vue}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.styl": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.{png,jpeg,jpg,gif,svg}": [
+      "imagemin-lint-staged",
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit-msg && lint-staged"
+    }
+  }
+  //...
 }
 
 ```
