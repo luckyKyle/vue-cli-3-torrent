@@ -59,7 +59,7 @@ export default {
     },
     // 触发时间选择
     showDatePicker() {
-      console.log(this.userinfo)
+      console.log('用户信息=>', this.userinfo)
       this.$createDatePicker({
         title: 'Date Picker',
         min: new Date(2008, 7, 8),

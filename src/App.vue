@@ -15,8 +15,8 @@
 export default {
   metaInfo() {
     return {
-      title: '玖富犇犇',
-      titleTemplate: '%s | 开户'
+      title: 'vue-cli种子项目',
+      titleTemplate: '%s | 首页'
     }
   }
 }
