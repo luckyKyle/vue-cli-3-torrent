@@ -27,7 +27,7 @@ module.exports = merge(base, {
   plugins: [
     new HappyPack({
       // 这个HappyPack的“名字”就叫做js，和上面module里rules的查询参数一致
-      id: 'js',
+      id: 'happyBabel',
       loaders: ['babel-loader?cacheDirectory'],
       // 指定进程池
       threadPool: happyThreadPool,
