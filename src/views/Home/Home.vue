@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="home">
     <cube-slide class="slide-wrapper"
                 :data="banners"
                 :options="options"
@@ -25,7 +25,6 @@
                  @click="handleTestClick"
                  class="btn2">Button
     </cube-button>
-
     <!-- skeleton component -->
     <skeleton slot="skeleton"
               v-if="!banners.length"></skeleton>
