@@ -14,7 +14,6 @@
 
 <style scoped lang="stylus">
 @import '~common/stylus/mixin'
-@import '~common/stylus/variable'
 .sketelon
   background #fff
   border-color #e5e6e9 #dfe0e4 #d0d1d5
@@ -50,7 +49,7 @@
     height 8px
     width 10px
   &.header-bottom
-    top 18px
+    top 18
     height 6px
   &.subheader-left, &.subheader-right
     top 24px

@@ -6,22 +6,22 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: _import('Home')
+    component: _import('home')
   },
   {
     path: '/login',
     name: 'login',
-    component: _import('Login')
+    component: _import('login')
   },
   {
     path: '/news',
     name: 'news',
-    component: _import('News')
+    component: _import('news')
   },
   {
     path: '/my',
     name: 'my',
-    component: _import('My'),
+    component: _import('my'),
     meta: {
       requireAuth: true
     }

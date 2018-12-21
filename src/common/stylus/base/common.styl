@@ -1,0 +1,21 @@
+@import 'variable.styl'
+@import 'mixin.styl'
+body, html
+  line-height 1
+  font-family 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback'
+  user-select none
+  -webkit-tap-highlight-color transparent
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  color $color-text
+  background #eff0f0
+  font-size $font-size-medium
+.font-red
+  color $color-red
+.font-green
+  color $color-green
+.loading-wrapper
+  pos-center()
+  z-index 9
+  width 40px
+  height 40px

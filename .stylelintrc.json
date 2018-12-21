@@ -1,13 +1,16 @@
 {
-  "extends": "stylelint-config-recommended",
-  "plugins": ["stylelint-selector-bem-pattern"],
+  "extends": "stylelint-config-prettier",
+  "plugins": ["stylelint-selector-bem-pattern", "stylelint-order"],
   "rules": {
-    "block-no-empty": null,
     "at-rule-empty-line-before": null,
-    "max-empty-lines": 2,
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
     "declaration-block-trailing-semicolon": "never",
+    "indentation": null,
+    "max-empty-lines": 2,
     "no-extra-semicolons": true,
-    "indentation": ["tab", { "except": ["value"] }],
-    "no-empty-source": null
+    "no-empty-source": null,
+    "unit-whitelist": ["%", "s", "px"]
   }
 }

@@ -38,7 +38,7 @@ module.exports = {
       .set('@', resolve('src'))
       .set('common', resolve('src/common'))
   },
-  configureWebpack: config => {
+  configureWebpack: () => {
     // 根据Node变量环境返回对应的自定义配置来合并config
     return DEV ? webpackDevConf : webpackProdConf
   },
@@ -49,7 +49,7 @@ module.exports = {
       stylus: {
         'resolve url': true,
         // 这里 新增 import 配置项，指向自定义主题文件
-        import: [path.resolve(__dirname, './src/common/stylus/theme')]
+        import: [path.resolve(__dirname, './src/common/stylus/base/theme')]
       }
     }
   },
@@ -60,10 +60,6 @@ module.exports = {
     port: 8088,
     https: false,
     hotOnly: false,
-    proxy, // 设置代理
-    // proxy:'http://localhost:3000',
-    before: app => {
-      // `app` 是一个 express 实例
-    }
+    proxy // 设置代理
   }
 }

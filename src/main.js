@@ -4,11 +4,10 @@ import router from '@/router'
 import store from '@/store'
 
 import VueMeta from 'vue-meta'
-import VConsole from 'vconsole'
 import VueLazyLoad from 'vue-lazyload'
-import lodash from 'lodash-es'
 
 import fastclick from 'fastclick'
+import lodash from 'lodash-es'
 import axios from '@/api/axios'
 
 import '@/mock'
@@ -57,6 +56,7 @@ fastclick.attach(document.body)
 
 // 开发环境开启vConsole
 if (process.env.NODE_ENV === 'production') {
+  const VConsole = require('vconsole')
   const vConsole = new VConsole()
   console.log(vConsole.version)
 }
