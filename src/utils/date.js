@@ -164,7 +164,7 @@ export const getDateRange = (count = 2, start = getToday()) => {
 }
 
 /**
- * [ 获取指定之前几个月的跨度，根据传入的参数Number，返回一个包含每个月所有日期的二维数组]
+ *  获取指定之前几个月的跨度，根据传入的参数Number，返回一个包含每个月所有日期的二维数组
  * @param  {[Number]} number [数字]
  * @param  {[String]} date   [可选，日期（'2018-02-20'）]
  * @return {[Array]}

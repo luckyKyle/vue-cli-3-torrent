@@ -3,9 +3,9 @@
  ***************************/
 
 /**
- * Usage: 对象深度对比判断相等
- * @param {回调函数} fn
- * @param {延时时长} ms
+ * 对象深度对比判断相等
+ * @param a Object
+ * @param b Object
  * @return Boolean
  * Example:  equals({ a: [2, { e: 3 }], b: [4], c: 'foo' }, { a: [2, { e: 3 }], b: [4], c: 'foo' }) -> true
  */
@@ -28,8 +28,8 @@ export const equals = (a, b) => {
 
 /**
  *  对象深拷贝，改变引用指向
- * @param {需要拷贝的对象} obj
- * @returns
+ * @param obj 需要拷贝的对象
+ * @return
  */
 export const deepClone = obj => {
   if (!obj && typeof obj !== 'object') {

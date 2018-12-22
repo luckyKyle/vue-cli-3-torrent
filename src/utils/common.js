@@ -6,11 +6,11 @@ import Vue from 'vue'
 const vm = new Vue()
 
 /**
- * Usage:复制到黏贴版
- * @param {传入字符串对应} str
+ * 将字符串复制到黏贴版
+ * @param  str 需要复制的文字
  * Example: copyToClipboard('success!')
  */
-export const copyToClipboard = str => {
+export const copyToClipboard = (str = '') => {
   const el = document.createElement('textarea')
   el.value = str
   el.setAttribute('readonly', '')
@@ -31,25 +31,25 @@ export const copyToClipboard = str => {
 }
 
 /**
- * Usage: 定时器防抖动
- * @param {回调函数} fn
- * @param {延时时长} ms
+ * 定时器防抖动
+ * @param  fn 回调函数
+ * @param  delay  延时时长
  * Example:  window.addEventListener( 'resize', debounce(() => { console.log(window.innerWidth) console.log(window.innerHeight) }, 250) )
  */
-// export const debounce = (fn, delay = 0) => {
-// let timer
-// return function (...args) {
-//   if (timer) {
-//     clearTimeout(timer)
-//   }
-//   timer = setTimeout(() => fn.apply(this, args), delay)
-// }
-// }
+export const debounce = (fn, delay = 0) => {
+  let timer
+  return function(...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
 
 /**
- * Usage: 将指定函数转换成promise函数式
- * @param {} func
- * @return Object  {}
+ * 将指定函数转换成promise函数式
+ * @param func
+ * @return Object
  * Example: const delay = promisify((d, cb) => setTimeout(cb, d))
             delay(2000).then(() => console.log('Hi!'))  -> Promise resolves after 2s
  */
@@ -58,6 +58,12 @@ export const promisify = func => (...args) =>
     func(...args, (err, result) => (err ? reject(err) : resolve(result)))
   )
 
+/**
+ * 弹出错误
+ * @param txt 错误文案
+ * Example: toastError('获取失败！')
+ * TODO  该方法为cube-ui的二次封装方法
+ */
 export const toastError = txt => {
   vm.$createToast({ type: 'error', txt }).show()
 }

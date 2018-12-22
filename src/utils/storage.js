@@ -14,7 +14,7 @@ export default {
   /**
    * 获取Storage
    * @param key 指定key值
-   * @returns  {any}
+   * @return  {any}
    * Example: getStorage('key')-> { a1: '111', a2: 222 }
    */
   get(key) {
@@ -26,7 +26,7 @@ export default {
    * 判断是否有对应key值的storage， 如果没有返回指定的key值则可以自定义默认值，不设置则返回布尔值
    * @param key 指定key值
    * @param defaultVal
-   * @returns Boolean
+   * @return Boolean
    * Example: hasStorage('key')-> true
    * Example: hasStorage('key',{ a1: '111', a2: 222 })-> key:{ a1: '111', a2: 222 }
    */

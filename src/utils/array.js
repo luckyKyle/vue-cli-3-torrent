@@ -19,6 +19,7 @@ export const getProperties = (arr, prop) => arr.map(item => item[prop])
 export const arrToUpper = arr => {
   if (!Array.isArray(arr) || !arr.every(item => typeof item === 'string'))
     return
+
   return arr.map(item => item.toUpperCase())
 }
 
@@ -28,9 +29,9 @@ export const arrToUpper = arr => {
  * @param  keepCount(Number) 保留小数点位数
  * @returns 转换为大写['11.00%','123.00%','434.00%']
  */
-export const arrToFloat = (arr, keepCount = 2) => {
+export const arrToFloat = (arr, decimals = 2) => {
   if (!Array.isArray(arr) || !arr.every(item => !isNaN(item))) return
-  return arr.map(item => item.toFixed(keepCount) + '%')
+  return arr.map(item => item.toFixed(decimals) + '%')
 }
 
 /**
@@ -60,7 +61,7 @@ export const compare = (key, flag) => {
  * 数组内根据对象大小升降序切换
  * @param arr 数组
  * @param key 根据某个key来排序
- * @param flag 正反序 ，默认降序
+ * @param flag 正反序 ，默认降序true
  * @returns  sortObj([{index:1},{index:5},{index:4},{index:3}],'index',true)
  */
 export const sortObj = (arr, key, flag = true) => {

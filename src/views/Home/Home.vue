@@ -31,7 +31,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
 import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -99,7 +99,6 @@ export default {
         const res = await api.getBanner()
         const data = res.data
         this.banners = data.banners
-        console.log('banner列表==', this.banners)
       } catch (err) {
         console.error('获取数据错误', err)
       }

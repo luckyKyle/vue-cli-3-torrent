@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="news">
 
     <!-- ScollView -->
     <div class="scroll-list-wrap"
