@@ -12,7 +12,6 @@ import axios from '@/api/axios'
 
 import '@/mock'
 
-import './common/js/rem'
 import './common/stylus/index.styl'
 
 import './components/register'
