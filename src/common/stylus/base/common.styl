@@ -13,8 +13,25 @@ body, html
   color $color-green
 .font-white
   color $color-white
+.font-333
+  color $color-333
+.font-666
+  color $color-666
+.font-999
+  color $color-999
+.font-333
+  color $color-333
+
+
 .loading-wrapper
   pos-center()
   z-index 9
   width 40px
   height 40px
+
+// 全局的入场动画
+.fade-enter-active, .fade-leave-active
+  transition all 0.2s
+.fade-enter, .fade-leave-to
+  transform translate3d(35%, 0, 0)
+  opacity 0

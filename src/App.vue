@@ -35,7 +35,7 @@ body
   margin-top 50px
   a
     font-weight bold
-    color #2c3e50
+    color $color-green
     &.router-link-exact-active
       color #42b983
 </style>
