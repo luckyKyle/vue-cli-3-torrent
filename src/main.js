@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from '@/router'
-import store from '@/store'
+import router from './router'
+import store from './store'
 
 import VueMeta from 'vue-meta'
 import VueLazyLoad from 'vue-lazyload'
 
 import fastclick from 'fastclick'
 import lodash from 'lodash-es'
-import axios from '@/api/axios'
+import axios from './api/axios'
 
-import '@/mock'
+import './mock'
 
 import './common/stylus/index.styl'
-
+import './common/js/rem'
 import './components/register'
-import '@/router/permission'
+import './router/permission'
 
 // 引入 Style 加载基础样式
 import {
