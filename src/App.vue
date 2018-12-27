@@ -8,16 +8,21 @@
     <keep-alive>
       <router-view />
     </keep-alive>
+    <loading v-if="showLoading" />
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+import { mapGetters } from 'vuex'
 export default {
   metaInfo() {
     return {
       title: 'vue-cli种子项目',
       titleTemplate: '%s | 首页'
     }
+  },
+  computed: {
+    ...mapGetters(['showLoading'])
   }
 }
 </script>
@@ -32,10 +37,10 @@ body
 #nav
   padding 30px
   text-align center
-  margin-top 50px
+  line-height 30px
+  margin 50px 0
   a
     font-weight bold
-    color $color-green
     &.router-link-exact-active
       color #42b983
 </style>

@@ -15,11 +15,10 @@
         </ul>
       </cube-scroll>
     </div>
-
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
 export default {
   data() {
     return {
@@ -31,7 +30,7 @@ export default {
     return {
       title: this.pageTitle,
       titleTemplate: '%s - Test',
-      script: [{ innerHTML: 'console.log("Hey!~~!")', type: 'text/javascript' }]
+      script: [{ innerHTML: 'console.log("Hey!~~!")' }]
     }
   },
   methods: {

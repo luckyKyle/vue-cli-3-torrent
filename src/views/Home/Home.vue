@@ -1,19 +1,22 @@
 <template>
   <div class="home">
-    <cube-slide class="slide-wrapper"
-                :data="banners"
-                :options="options"
-                v-if="banners.length">
-      <cube-slide-item v-for="(item, index) in banners"
-                       :key="index"
-                       class="slide-item"
-                       @click.native="selelctSlide(index)">
-        <a>
-          <img class="img"
-               :src="item.imageUrl">
-        </a>
-      </cube-slide-item>
-    </cube-slide>
+    <section class="slide-wrapper">
+      <cube-slide :data="banners"
+                  :options="options"
+                  v-if="banners.length">
+        <cube-slide-item v-for="(item, index) in banners"
+                         :key="index"
+                         class="slide-item"
+                         @click.native="selelctSlide(index)">
+          <a>
+            <img class="img"
+                 :src="item.imageUrl">
+          </a>
+        </cube-slide-item>
+      </cube-slide>
+
+    </section>
+
     <cube-button @click.native="showDatePicker"
                  class="btn">
       Show DatePicker
@@ -32,7 +35,7 @@
 </template>
 
 <script>
-import api from '@/api'
+// import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -96,9 +99,14 @@ export default {
     // 获取数据
     async _fetchData() {
       try {
-        const res = await api.getBanner()
+        // const res = await api.getBanner()
+        const res = await this.$http.get('banner')
         const data = res.data
         this.banners = data.banners
+        // setTimeout(() => {
+        //   this.banners = data.banners
+        //   this.$store.commit('SET_LOADING', false)
+        // }, 200)
       } catch (err) {
         console.error('获取数据错误', err)
       }

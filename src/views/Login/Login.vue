@@ -1,14 +1,38 @@
 <template>
-  <div class="container">
-    <h1 class="tip-text">{{msg}}</h1>
+  <div class="login">
+    <h1 class="tip-text">登陆页</h1>
+    <cube-input v-model="username"
+                class="input"></cube-input>
+    <cube-input v-model="password"
+                :type="'password'"
+                class="input"
+                autocomplete="new-password"></cube-input>
+
+    <cube-button @click.native="handleLogin">登录</cube-button>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+import storage from '@/utils/storage'
 export default {
   data() {
     return {
-      msg: '未授权，跳到登陆'
+      username: '', //账户名
+      password: '' //密码
+    }
+  },
+  methods: {
+    handleLogin() {
+      const { username, password } = this
+      storage.set('userinfo', { username, password })
+      if (!this.username || !this.password) {
+        this.$createToast({
+          type: 'error',
+          txt: '不得为空'
+        }).show()
+        return
+      }
+      this.$router.push({ path: '/my' })
     }
   }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 import Qs from 'qs'
 import cookie from '@/utils/cache'
 import { toastError } from '@/utils/common'
@@ -14,9 +15,15 @@ const Axios = axios.create({
   }
 })
 
+let timer = null
+// let count = 0
+
 // http请求拦截器<pendding>
 Axios.interceptors.request.use(
   config => {
+    store.commit('SET_LOADING', true)
+    console.log('开始==>', store.state.showLoading)
+
     if (config.method === 'post') {
       // 整理数据格式
       config.data.transformRequest = data => Qs.stringify(data)
@@ -48,12 +55,15 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
   response => {
     let data = response.data
-
     if (data.code === ERR_OK) {
       // 判断返回数据格式
       if (typeof data === 'string' && data !== '') {
         data = JSON.parse(data)
       }
+      !timer && clearTimeout(timer)
+      timer = setTimeout(() => {
+        store.commit('SET_LOADING', false)
+      }, 50)
       return data
     } else {
       toastError(data.message)
