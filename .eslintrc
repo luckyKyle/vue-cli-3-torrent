@@ -8,10 +8,14 @@
     "@vue/prettier"
   ],
   "rules": {
-    "no-console": [
-      0,
-      "log",
-      "error"
+    "no-console": [0, "log", "error"],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": false,
+        "trailingComma": "none"
+      }
     ]
   },
   "parserOptions": {

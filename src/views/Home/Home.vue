@@ -103,10 +103,8 @@ export default {
         const res = await this.$http.get('banner')
         const data = res.data
         this.banners = data.banners
-        // setTimeout(() => {
-        //   this.banners = data.banners
-        //   this.$store.commit('SET_LOADING', false)
-        // }, 200)
+        let str = '3453``*^&*^dafgdfg'
+        console.log(str.replace(/[^\dA-Za-z]/g, ' ').replace(/\s+/g, ''))
       } catch (err) {
         console.error('获取数据错误', err)
       }
