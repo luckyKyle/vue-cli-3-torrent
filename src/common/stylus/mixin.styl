@@ -1,16 +1,18 @@
 // 背景图片
-bg-image($imgName, $width = auto, $height = auto)
-  width $width
-  height $height
+bg-image($imgName)
+  $image2X = './images/' + $imgName + '@2x.png'
+  $image3X = './images/' + $imgName + '@3x.png'
+  width image-size($image2X)[0]
+  height image-size($image2X)[1]
   background-repeat no-repeat
   background-size contain
-  background-image url('../../common/image/' + $imgName + '@2x.png')
-  @media (min-resolution: 3dppx)
-    background-image url('../../common/image/' + $imgName + '@3x.png')
+  background-image url($image2X)
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+    background-image url($image3X)
 // 锁定图片尺寸
-fix-image-size()
-  max-width 100%
-  max-height 100%
+max-size($size = 100%)
+  max-width $size
+  max-height $size
 // 多行溢出
 mult-line($line = 2)
   overflow hidden
@@ -42,7 +44,7 @@ extend-click()
     right -10px
     bottom -10px
 // 满屏
-fixed-full($zIndex = 1)
+fixed-full($zIndex = 2)
   position fixed
   z-index $zIndex
   top 0
@@ -69,7 +71,7 @@ pos-x()
   left 50%
   transform translateX(-50%)
 // 仅垂直居中
-pos-y($offset = 0, $left = true)
+pos-y()
   position absolute
   top 50%
   transform translateY(-50%)
