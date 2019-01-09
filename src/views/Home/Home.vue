@@ -99,12 +99,10 @@ export default {
     // 获取数据
     async _fetchData() {
       try {
-        // const res = await api.getBanner()
         const res = await this.$http.get('banner')
         const data = res.data
         this.banners = data.banners
-        let str = '3453``*^&*^dafgdfg'
-        console.log(str.replace(/[^\dA-Za-z]/g, ' ').replace(/\s+/g, ''))
+        this.$store.commit('SET_LOADING', false)
       } catch (err) {
         console.error('获取数据错误', err)
       }

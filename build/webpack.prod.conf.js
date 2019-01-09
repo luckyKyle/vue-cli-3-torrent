@@ -1,14 +1,17 @@
 const path = require('path')
+const webpack = require('webpack')
 const OS = require('os')
 const HappyPack = require('happypack')
 const happyThreadPool = HappyPack.ThreadPool({ size: OS.cpus().length })
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const WebpackDeepScopeAnalysisPlugin = require('webpack-deep-scope-plugin').default
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const WebpackDeepScopeAnalysisPlugin = require('webpack-deep-scope-plugin')
+  .default
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
 const merge = require('webpack-merge')
 const base = require('./webpack.base.conf.js')
-const resolve = (dir) => path.join(__dirname, dir)
+const resolve = dir => path.join(__dirname, dir)
 
 module.exports = merge(base, {
   mode: 'production',
@@ -17,18 +20,21 @@ module.exports = merge(base, {
   },
   module: {
     rules: [
-    {
-      test: /\.js$/,
-      include: [resolve('src')],
-      exclude: /node_modules/,
-      loader: 'happypack/loader?id=happyBabel'
-    }]
+      {
+        test: /\.js$/,
+        include: [resolve('src')],
+        exclude: /node_modules/,
+        loader: 'happypack/loader?id=happyBabel'
+      }
+    ]
   },
   plugins: [
     new HappyPack({
       // 这个HappyPack的“名字”就叫做js，和上面module里rules的查询参数一致
       id: 'happyBabel',
       loaders: ['babel-loader?cacheDirectory'],
+      // 开启 4 个线程
+      threads: 4,
       // 指定进程池
       threadPool: happyThreadPool,
       cache: true,
@@ -49,10 +55,18 @@ module.exports = merge(base, {
       }
     }),
 
+    new webpack.DllPlugin({
+      // name 必须和 output.library 一致
+      name: '[name]-[hash]',
+      // 该属性需要与 DllReferencePlugin 中一致
+      context: __dirname,
+      path: path.join(__dirname, 'dist', '[name]-manifest.json')
+    }),
+
     // 提高webpack的tree-shaking的效率
     new WebpackDeepScopeAnalysisPlugin(),
 
     // 文件结构可视化，找出导致体积过大的原因
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ]
 })

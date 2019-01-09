@@ -40,6 +40,7 @@ export default {
         const res = await this.$http.get('users')
         const data = res.data
         this.newsList = data.list
+        this.$store.commit('SET_LOADING', false)
       } catch (err) {
         console.error('获取数据错误 ', err)
       }
