@@ -59,6 +59,15 @@ export const promisify = func => (...args) =>
   )
 
 /**
+ * 去除try catch方法
+ * @param func
+ * @return promise
+ * Example: const [err, data] = await awaitWrap(fetchData())
+ */
+export const awaitWrap = promise =>
+  promise.then(data => [null, data]).catch(err => [err, null])
+
+/**
  * 弹出错误
  * @param txt 错误文案
  * Example: toastError('获取失败！')

@@ -14,8 +14,10 @@ import './mock'
 
 import './common/stylus/index.styl'
 import './common/js/rem'
-import './components/register'
 import './router/permission'
+import './components/register'
+
+import Notification from './createApp/Notification'
 
 // 引入 Style 加载基础样式
 import {
@@ -37,6 +39,8 @@ Vue.use(Dialog)
 Vue.use(Toast)
 Vue.use(DatePicker)
 Vue.use(Slide)
+
+Vue.use(Notification)
 
 // 单独设置页面的title和meta信息
 Vue.use(VueMeta)

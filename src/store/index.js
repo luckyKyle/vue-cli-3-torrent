@@ -9,7 +9,7 @@ import storage from '@/utils/storage'
 // import createLogger from 'vuex/dist/logger'
 Vue.use(Vuex)
 
-const debug = process.env.NODE_ENV !== 'production'
+const isDev = process.env.NODE_ENV !== 'production'
 
 const createPersisted = createPersistedState({
   key: 'vuexStorage',
@@ -31,7 +31,7 @@ export default new Vuex.Store({
   getters,
   state,
   mutations,
-  strict: debug,
-  // 状态持久化
-  plugins: debug ? [createPersisted] : []
+  strict: isDev,
+  //插件: 状态持久化
+  plugins: isDev ? [createPersisted] : []
 })

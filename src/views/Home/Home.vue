@@ -14,7 +14,6 @@
           </a>
         </cube-slide-item>
       </cube-slide>
-
     </section>
 
     <cube-button @click.native="showDatePicker"
@@ -29,14 +28,15 @@
                  class="btn2">Button
     </cube-button>
     <!-- skeleton component -->
-    <skeleton slot="skeleton"
-              v-if="!banners.length"></skeleton>
+    <!-- <skeleton slot="skeleton"
+              v-if="!banners.length"></skeleton> -->
   </div>
 </template>
 
 <script>
 // import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
+import { awaitWrap } from '@/utils/common'
 
 export default {
   data() {
@@ -58,6 +58,10 @@ export default {
     // 点击按钮
     handleTestClick() {
       this.$store.commit('SET_USETINFO', { name: '123' })
+      this.$notify({
+        content: 'test $notify',
+        btn: 'close'
+      })
     },
     // 触发时间选择
     showDatePicker() {
@@ -98,14 +102,11 @@ export default {
     },
     // 获取数据
     async _fetchData() {
-      try {
-        const res = await this.$http.get('banner')
-        const data = res.data
-        this.banners = data.banners
-        this.$store.commit('SET_LOADING', false)
-      } catch (err) {
-        console.error('获取数据错误', err)
-      }
+      const [err, res] = await awaitWrap(this.$http.get('banner'))
+      const data = res.data
+      this.banners = data.banners
+      this.$store.commit('SET_LOADING', false)
+      console.log(err)
     },
     ...mapMutations({
       setUserInfo: 'SET_USETINFO'

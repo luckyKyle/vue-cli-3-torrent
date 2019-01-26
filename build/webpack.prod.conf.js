@@ -16,6 +16,7 @@ const resolve = dir => path.join(__dirname, dir)
 module.exports = merge(base, {
   mode: 'production',
   entry: {
+    // 需要统一打包的类库
     vendor: ['vue', 'lodash-es', 'vuex', 'axios', 'vue-router', 'cube-ui']
   },
   module: {
@@ -29,6 +30,7 @@ module.exports = merge(base, {
     ]
   },
   plugins: [
+    // HappyPack 可以将 Loader 的同步执行转换为多线程并行的，这样就能充分利用系统资源来加快打包效率了
     new HappyPack({
       // 这个HappyPack的“名字”就叫做js，和上面module里rules的查询参数一致
       id: 'happyBabel',
@@ -54,18 +56,8 @@ module.exports = merge(base, {
         }
       }
     }),
-
-    new webpack.DllPlugin({
-      // name 必须和 output.library 一致
-      name: '[name]-[hash]',
-      // 该属性需要与 DllReferencePlugin 中一致
-      context: __dirname,
-      path: path.join(__dirname, 'dist', '[name]-manifest.json')
-    }),
-
     // 提高webpack的tree-shaking的效率
     new WebpackDeepScopeAnalysisPlugin(),
-
     // 文件结构可视化，找出导致体积过大的原因
     // new BundleAnalyzerPlugin()
   ]

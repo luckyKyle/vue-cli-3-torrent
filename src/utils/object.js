@@ -27,7 +27,7 @@ export const equals = (a, b) => {
 }
 
 /**
- *  对象深拷贝，改变引用指向
+ * 对象深拷贝，改变引用指向
  * @param obj 需要拷贝的对象
  * @return
  */
@@ -47,4 +47,16 @@ export const deepClone = obj => {
     }
   }
   return targetObj
+}
+
+/**
+ * 彻底冻结对象
+ * @param obj 需要冻结的对象
+ * @return
+ */
+export const freezeObj = obj => {
+  Object.freeze(obj)
+  Object.keys(obj).forEach(key => {
+    typeof obj[key] === 'object' && freezeObj(obj[key])
+  })
 }

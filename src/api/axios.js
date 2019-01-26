@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Qs from 'qs'
 import cookie from '@/utils/cache'
+import store from '@/store'
 import { toastError } from '@/utils/common'
 import { MAX_TIME_OUT, ERR_OK, HOST } from './config'
 
@@ -17,10 +18,10 @@ const Axios = axios.create({
 // http请求拦截器<pendding>
 Axios.interceptors.request.use(
   config => {
-    if (config.method === 'post') {
-      // 整理数据格式
-      config.data.transformRequest = data => Qs.stringify(data)
-    }
+    store.dispatch('setLoading', true)
+
+    console.log('store.state.showLoading==>', store.state.showLoading)
+
     const token = cookie.get('token')
     // 判断是否存在token，即判断用户是否登录
     if (token) {
@@ -28,17 +29,43 @@ Axios.interceptors.request.use(
       config.headers.Authorization = token // 每个http header都加上token
     }
 
-    // 防止get请求获取数据304缓存，必须保证状态为200
-    if (config.method === 'get') {
-      if (config.params) {
-        config.params['_'] = +new Date()
-      } else {
-        config.params = { _: +new Date() }
-      }
+    // if (config.method === 'post') {
+    //   // 整理数据格式
+    //   config.data.transformRequest = data => Qs.stringify(data)
+    // }
+    // // 防止get请求获取数据304缓存，必须保证状态为200
+    // if (config.method === 'get') {
+    //   if (config.params) {
+    //     config.params['_'] = +new Date()
+    //   } else {
+    //     config.params = { _: +new Date() }
+    //   }
+    // }
+    const method = config.method.toLowerCase()
+
+    switch (method) {
+      case 'post':
+        // 整理数据格式
+        config.data.transformRequest = data => Qs.stringify(data)
+        break
+      case 'get':
+        // 防止get请求获取数据304缓存，必须保证状态为200
+        if (config.params) {
+          config.params['_'] = +new Date()
+        } else {
+          config.params = { _: +new Date() }
+        }
+        break
     }
+
     return config
   },
   error => {
+    // loading 清 0
+    setTimeout(() => {
+      store.dispatch('setLoading', 0)
+    }, 300)
+
     toastError(error.data.message)
     return Promise.reject(error)
   }
@@ -48,6 +75,9 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
   response => {
     let data = response.data
+
+    store.dispatch('setLoading', false)
+
     if (data.code === ERR_OK) {
       // 判断返回数据格式
       if (typeof data === 'string' && data !== '') {
@@ -61,6 +91,7 @@ Axios.interceptors.response.use(
   },
   error => {
     let message = error.message
+    store.dispatch('setLoading', false)
     // 超时错误
     if (error.code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
       message = '网络请求超时，请稍后重试'

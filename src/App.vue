@@ -8,7 +8,7 @@
     <keep-alive>
       <router-view />
     </keep-alive>
-    <loading v-if="showLoading" />
+    <!-- <loading v-if="showLoading" /> -->
   </div>
 </template>
 
@@ -23,6 +23,9 @@ export default {
   },
   computed: {
     ...mapGetters(['showLoading'])
+  },
+  mounted() {
+    console.log('this,showLoading==>', this.showLoading)
   }
 }
 </script>

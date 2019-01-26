@@ -5,7 +5,12 @@ const mutations = {
     state.userinfo = userinfo
   },
   [types.SET_LOADING](state, isShow) {
-    state.showLoading = isShow
+    // error 的时候直接重置
+    if (!isShow) {
+      state.showLoading = false
+      return
+    }
+    state.showLoading = isShow ? ++state.showLoading : --state.showLoading
   }
 }
 export default mutations

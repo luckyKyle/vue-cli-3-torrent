@@ -48,11 +48,10 @@ export const isSymbol = val => typeof val === 'symbol'
 
 /**
  *  检查给定参数是否为NaN
- * Example:  isSymbol('x') -> false
- * Example:  isSymbol(Symbol('x')) -> true
+ * Example:  isNaN('x') -> false
+ * Example:  isNan(NaN) -> true
  */
-export const isNaN = val => isNaN(val)
-
+export const isNan = val => Object.is(val, NaN)
 /**
  *  检查给定参数是否为对象
  */
