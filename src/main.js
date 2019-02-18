@@ -10,6 +10,8 @@ import fastclick from 'fastclick'
 import lodash from 'lodash-es'
 import axios from './api/axios'
 
+import * as filters from './filters' // global filters
+
 import './mock'
 
 import './common/stylus/index.styl'
@@ -48,6 +50,11 @@ Vue.use(VueMeta)
 // 图片懒加载
 Vue.use(VueLazyLoad, {
   loading: require('./common/image/default.png')
+})
+
+// 全局注册筛选器
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
 })
 
 Vue.config.productionTip = false

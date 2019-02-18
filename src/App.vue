@@ -31,8 +31,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '~common/stylus/variable.styl'
-@import '~common/stylus/mixin.styl'
+@import '~common/stylus/variable'
+@import '~common/stylus/mixin'
 body
   font-size $font-28
   color $font-text

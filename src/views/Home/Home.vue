@@ -17,6 +17,7 @@
     </section>
 
     <cube-button @click.native="showDatePicker"
+                 v-waves
                  class="btn">
       Show DatePicker
     </cube-button>
@@ -24,7 +25,7 @@
     <cube-button :light="true"
                  :inline="true"
                  :outline="true"
-                 @click="handleTestClick"
+                 @click.prevent="handleTestClick"
                  class="btn2">Button
     </cube-button>
     <!-- skeleton component -->
@@ -37,12 +38,16 @@
 // import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
 import { awaitWrap } from '@/utils/common'
+import waves from '@/directive/waves' // 水波纹指令
 
 export default {
   data() {
     return {
       banners: []
     }
+  },
+  directives: {
+    waves
   },
   computed: {
     options() {
@@ -65,7 +70,6 @@ export default {
     },
     // 触发时间选择
     showDatePicker() {
-      console.log('用户信息=>', this.userinfo)
       this.$createDatePicker({
         title: 'Date Picker',
         min: new Date(2008, 7, 8),

@@ -16,11 +16,26 @@ export const currentURL = () => window.location.href
  * @returns Object
  * Example: getURLParameters('http://url.com/page?name=Adam&surname=Smith') -> {name: 'Adam', surname: 'Smith'}
  */
-export const getURLParameters = (url = window.location.href) =>
+export const getUrlParams = (url = window.location.href) =>
   url.match(/([^?=&]+)(=([^&]*))/g).reduce((a, v) => {
     a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)
     return a
   }, {})
+
+/**
+ * 从URL中解析参数，相对getUrlParams更省时间
+ * @param {String} url
+ * @returns Object
+ */
+export const getParams = url => {
+  const keyValueArr = url.split('?')[1].split('&')
+  let paramObj = {}
+  keyValueArr.forEach(item => {
+    const keyValue = item.split('=')
+    paramObj[keyValue[0]] = keyValue[1]
+  })
+  return paramObj
+}
 
 /**
  * url 重定向

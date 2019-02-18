@@ -47,8 +47,6 @@ const notify = options => {
   instance.vm.visible = true
   document.body.appendChild(instance.vm.$el)
 
-  console.log('id==>', id)
-
   // 距底部高度
   let verticalOffset = 0
   instances.forEach(item => {
