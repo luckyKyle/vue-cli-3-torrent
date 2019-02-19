@@ -38,7 +38,7 @@
 // import api from '@/api'
 import { mapGetters, mapMutations } from 'vuex'
 import { awaitWrap } from '@/utils/common'
-import waves from '@/directive/waves' // 水波纹指令
+import waves from '@/directives/waves'
 
 export default {
   data() {
