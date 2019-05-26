@@ -90,14 +90,12 @@ export const isOdd = n => isNumber(n) && (n % 2 === 1 || n % 2 === -1)
 /**
  *  检查设备是否是竖屏状态
  */
-export const isVertical = () =>
-  window.orientation === 180 || window.orientation === 0
+export const isVertical = () => window.orientation === 180 || window.orientation === 0
 
 /**
  *  检查设备是否是横屏状态
  */
-export const isLandscape = () =>
-  window.orientation === 90 || window.orientation === -90
+export const isLandscape = () => window.orientation === 90 || window.orientation === -90
 
 /*****************************
  * ↓↓↓↓↓↓↓ 使用正则判断 ↓↓↓↓↓↓↓

@@ -2,11 +2,11 @@
   <div class="login">
     <h1 class="tip-text">登陆页</h1>
     <cube-input v-model="username"
-                class="input"></cube-input>
+                class="input" />
     <cube-input v-model="password"
                 :type="'password'"
                 class="input"
-                autocomplete="new-password"></cube-input>
+                autocomplete="new-password" />
 
     <cube-button @click.native="handleLogin">登录</cube-button>
   </div>

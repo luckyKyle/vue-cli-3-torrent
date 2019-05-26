@@ -7,8 +7,7 @@
  * @param {传入日期对象} str
  * Example: getColonTimeFromDate(new Date()) -> "18:04:00"
  */
-export const getColonTimeFromDate = (date = new Date()) =>
-  date.toTimeString().slice(0, 8)
+export const getColonTimeFromDate = (date = new Date()) => date.toTimeString().slice(0, 8)
 
 /**
  *  返回两个日期之间的差异 (以天为值)。
@@ -96,13 +95,7 @@ export const compareDate = (d1, d2) => {
 export const getToday = () => {
   let day = new Date()
   day.setTime(day.getTime())
-  return (
-    day.getFullYear() +
-    '-' +
-    padTime(day.getMonth() + 1) +
-    '-' +
-    padTime(day.getDate())
-  )
+  return day.getFullYear() + '-' + padTime(day.getMonth() + 1) + '-' + padTime(day.getDate())
 }
 
 /**
@@ -115,13 +108,7 @@ export const getPreWeekDay = (pre = 7) => {
   let now = new Date()
   let oneWeekTime = pre * 24 * 60 * 60 * 1000
   let lastWeekDay = new Date(now - oneWeekTime)
-  return (
-    lastWeekDay.getFullYear() +
-    '-' +
-    padTime(lastWeekDay.getMonth() + 1) +
-    '-' +
-    padTime(lastWeekDay.getDate())
-  )
+  return lastWeekDay.getFullYear() + '-' + padTime(lastWeekDay.getMonth() + 1) + '-' + padTime(lastWeekDay.getDate())
 }
 
 /**

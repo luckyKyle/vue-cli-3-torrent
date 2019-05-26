@@ -10,7 +10,7 @@
                          @click.native="selelctSlide(index)">
           <a>
             <img class="img"
-                 :src="item.imageUrl">
+                 :src="item.imageUrl" />
           </a>
         </cube-slide-item>
       </cube-slide>

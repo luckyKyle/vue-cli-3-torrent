@@ -7,7 +7,6 @@ import VueMeta from 'vue-meta'
 import VueLazyLoad from 'vue-lazyload'
 
 import fastclick from 'fastclick'
-import lodash from 'lodash-es'
 import axios from './api/axios'
 
 import * as filters from './filters' // global filters
@@ -60,7 +59,6 @@ Object.keys(filters).forEach(key => {
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
-Vue.prototype.$lodash = lodash
 
 fastclick.attach(document.body)
 

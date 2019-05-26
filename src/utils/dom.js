@@ -9,8 +9,7 @@
  * Example:bottomVisible() -> true
  */
 export const bottomVisible = () =>
-  document.documentElement.clientHeight + window.scrollY >=
-    document.documentElement.scrollHeight ||
+  document.documentElement.clientHeight + window.scrollY >= document.documentElement.scrollHeight ||
   document.documentElement.clientHeight
 
 /**

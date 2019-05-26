@@ -1,13 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
-const OS = require('os')
-const HappyPack = require('happypack')
-const happyThreadPool = HappyPack.ThreadPool({ size: OS.cpus().length })
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const WebpackDeepScopeAnalysisPlugin = require('webpack-deep-scope-plugin')
-  .default
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
+const WebpackDeepScopeAnalysisPlugin = require('webpack-deep-scope-plugin').default
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+//   .BundleAnalyzerPlugin
 
 const merge = require('webpack-merge')
 const base = require('./webpack.base.conf.js')
@@ -19,6 +15,11 @@ module.exports = merge(base, {
     // 需要统一打包的类库
     vendor: ['vue', 'lodash-es', 'vuex', 'axios', 'vue-router', 'cube-ui']
   },
+  // output: {
+  //   path: path.join(__dirname, '../public/vendor'),
+  //   filename: '[name].dll.js',
+  //   library: '[name]_[hash]' // vendor.dll.js中暴露出的全局变量名
+  // },
   module: {
     rules: [
       {
@@ -30,17 +31,10 @@ module.exports = merge(base, {
     ]
   },
   plugins: [
-    // HappyPack 可以将 Loader 的同步执行转换为多线程并行的，这样就能充分利用系统资源来加快打包效率了
-    new HappyPack({
-      // 这个HappyPack的“名字”就叫做js，和上面module里rules的查询参数一致
-      id: 'happyBabel',
-      loaders: ['babel-loader?cacheDirectory'],
-      // 开启 4 个线程
-      threads: 4,
-      // 指定进程池
-      threadPool: happyThreadPool,
-      cache: true,
-      verbose: true
+    new webpack.DllPlugin({
+      path: path.join(__dirname, '../public/vendor', '[name]-manifest.json'),
+      name: '[name]_[hash]', // 和library保持一致
+      context: process.cwd()
     }),
     new ParallelUglifyPlugin({
       cacheDir: '.cache/',
@@ -57,7 +51,7 @@ module.exports = merge(base, {
       }
     }),
     // 提高webpack的tree-shaking的效率
-    new WebpackDeepScopeAnalysisPlugin(),
+    new WebpackDeepScopeAnalysisPlugin()
     // 文件结构可视化，找出导致体积过大的原因
     // new BundleAnalyzerPlugin()
   ]

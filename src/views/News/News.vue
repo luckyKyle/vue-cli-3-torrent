@@ -1,7 +1,5 @@
 <template>
   <div class="news">
-
-    <!-- ScollView -->
     <div class="scroll-list-wrap"
          v-if="newsList.length">
       <cube-scroll ref="scroll"
@@ -10,7 +8,7 @@
           <li class="item border-bottom-1px"
               v-for="(item, index) in newsList"
               :key="index">
-            {{item.userName}}
+            {{ item.userName }}
           </li>
         </ul>
       </cube-scroll>

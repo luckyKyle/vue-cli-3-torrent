@@ -44,8 +44,7 @@ export const getParams = url => {
  * 传递第二个参数以模拟链接单击 (true -默认值) 或 HTTP 重定向 (false).
  * Example:redirect('https://google.com')
  */
-export const redirect = (url, asLink = true) =>
-  asLink ? (window.location.href = url) : window.location.replace(url)
+export const redirect = (url, asLink = true) => (asLink ? (window.location.href = url) : window.location.replace(url))
 
 /**
  * 将一个对象转换为url的参数拼接
@@ -61,13 +60,10 @@ export const objParseQuery = (obj, key = '', encode = null) => {
   let paramStr = ''
   let t = typeof obj
   if (t === 'string' || t === 'number' || t === 'boolean') {
-    paramStr += `&${key}=${
-      encode === null || encode ? encodeURIComponent(obj) : obj
-    }`
+    paramStr += `&${key}=${encode === null || encode ? encodeURIComponent(obj) : obj}`
   } else {
     for (var i in obj) {
-      let k =
-        key === null ? i : key + (obj instanceof Array ? `[${i}]` : `${i}`)
+      let k = key === null ? i : key + (obj instanceof Array ? `[${i}]` : `${i}`)
       paramStr += objParseQuery(obj[i], k, encode)
     }
   }

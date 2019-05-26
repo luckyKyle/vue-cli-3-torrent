@@ -17,8 +17,7 @@ export const getProperties = (arr, prop) => arr.map(item => item[prop])
  * @returns 转换为大写['AAA','BBBB','CC']
  */
 export const arrToUpper = arr => {
-  if (!Array.isArray(arr) || !arr.every(item => typeof item === 'string'))
-    return
+  if (!Array.isArray(arr) || !arr.every(item => typeof item === 'string')) return
 
   return arr.map(item => item.toUpperCase())
 }

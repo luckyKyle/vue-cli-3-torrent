@@ -17,10 +17,7 @@ export const copyToClipboard = (str = '') => {
   el.style.position = 'absolute'
   el.style.left = '-9999px'
   document.body.appendChild(el)
-  const selected =
-    document.getSelection().rangeCount > 0
-      ? document.getSelection().getRangeAt(0)
-      : false
+  const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
   el.select()
   document.execCommand('copy')
   document.body.removeChild(el)
@@ -54,9 +51,7 @@ export const debounce = (fn, delay = 0) => {
             delay(2000).then(() => console.log('Hi!'))  -> Promise resolves after 2s
  */
 export const promisify = func => (...args) =>
-  new Promise((resolve, reject) =>
-    func(...args, (err, result) => (err ? reject(err) : resolve(result)))
-  )
+  new Promise((resolve, reject) => func(...args, (err, result) => (err ? reject(err) : resolve(result))))
 
 /**
  * 去除try catch方法
@@ -64,8 +59,7 @@ export const promisify = func => (...args) =>
  * @return promise
  * Example: const [err, data] = await awaitWrap(fetchData())
  */
-export const awaitWrap = promise =>
-  promise.then(data => [null, data]).catch(err => [err, null])
+export const awaitWrap = promise => promise.then(data => [null, data]).catch(err => [err, null])
 
 /**
  * 弹出错误

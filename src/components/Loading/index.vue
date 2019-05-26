@@ -1,10 +1,9 @@
 <template>
-  <div class="loading"
-       :class="{mask}">
+  <div class="loading" :class="{ mask }">
     <div class="cube-popup-mask"></div>
     <section class="loading-wrapper">
       <cube-loading />
-      <p class="text">{{text}}</p>
+      <p class="text">{{ text }}</p>
     </section>
   </div>
 </template>
