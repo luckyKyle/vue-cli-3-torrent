@@ -42,6 +42,8 @@ import waves from '@/directives/waves'
 
 export default {
   data() {
+    console.log('options==>', this.options)
+    console.log('handleTestClick==>', this.handleTestClick)
     return {
       banners: []
     }
@@ -60,12 +62,9 @@ export default {
     ...mapGetters(['userinfo'])
   },
   methods: {
-    doSomething() {
-      console.log('新闻加载完成')
-    },
     // 点击按钮
     handleTestClick() {
-      this.$store.commit('SET_USETINFO', { name: '123' })
+      this.$store.commitc('SET_USETINFO', { name: '123' })
       this.$notify({
         content: 'test $notify',
         btn: 'close'
