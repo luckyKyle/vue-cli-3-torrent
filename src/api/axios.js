@@ -20,8 +20,6 @@ Axios.interceptors.request.use(
   config => {
     store.dispatch('setLoading', true)
 
-    console.log('store.state.showLoading==>', store.state.showLoading)
-
     const token = cookie.get('token')
     // 判断是否存在token，即判断用户是否登录
     if (token) {
@@ -61,11 +59,6 @@ Axios.interceptors.request.use(
     return config
   },
   error => {
-    // loading 清 0
-    setTimeout(() => {
-      store.dispatch('setLoading', 0)
-    }, 300)
-
     toastError(error.data.message)
     return Promise.reject(error)
   }

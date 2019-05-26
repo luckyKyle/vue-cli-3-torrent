@@ -23,9 +23,6 @@ export default {
   },
   computed: {
     ...mapGetters(['showLoading'])
-  },
-  mounted() {
-    console.log('this,showLoading==>', this.showLoading)
   }
 }
 </script>

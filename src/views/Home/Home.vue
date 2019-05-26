@@ -60,6 +60,9 @@ export default {
     ...mapGetters(['userinfo'])
   },
   methods: {
+    doSomething() {
+      console.log('新闻加载完成')
+    },
     // 点击按钮
     handleTestClick() {
       this.$store.commit('SET_USETINFO', { name: '123' })
@@ -110,7 +113,7 @@ export default {
       const data = res.data
       this.banners = data.banners
       this.$store.commit('SET_LOADING', false)
-      console.log(err)
+      err && console.error(err)
     },
     ...mapMutations({
       setUserInfo: 'SET_USETINFO'
