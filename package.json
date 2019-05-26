@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "precommit": "lint-staged && npm run lint"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -67,7 +68,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint && lint-staged"
+      "pre-commit": "npm run lint && lint-staged"
     }
   }
 }

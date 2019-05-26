@@ -28,9 +28,6 @@
                  @click.prevent="handleTestClick"
                  class="btn2">Button
     </cube-button>
-    <!-- skeleton component -->
-    <!-- <skeleton slot="skeleton"
-              v-if="!banners.length"></skeleton> -->
   </div>
 </template>
 
