@@ -13,7 +13,7 @@
     "cube-ui": "^1.12.8",
     "decimal.js": "^10.0.2",
     "fastclick": "^1.0.6",
-    "lodash-es": "^4.17.11",
+    "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
     "qs": "^6.6.0",
     "ua-parser-js": "^0.7.19",
